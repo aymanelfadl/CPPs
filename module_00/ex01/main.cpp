@@ -1,6 +1,4 @@
 #include "PhoneBook.hpp"
-#include <iostream>
-#include <string>
 
 std::string getInput(const std::string& prompt)
 {
@@ -19,24 +17,49 @@ Contact getNewContact()
     std::string secret = getInput("Enter Darkest Secret: ");
 
     if (first.empty() || last.empty() || nick.empty() || phone.empty() || secret.empty())
-    {
-        std::cout << "Error: All fields must be filled. Contact not created.\n";
         return Contact();
-    }
-
+    
     Contact c(first, last, nick, phone, secret);
     return c;
 }
 
 std::string getChoice()
 {
-    std::string choice; 
-
-    std::cout << "* Welcome To Your Awesome PhoneBook *" << std::endl;
+    std::string choice;
+    std::cout << "\n* Welcome To Your Awesome PhoneBook *" << std::endl;
     std::cout << "  ** What Do YOU need: **\n   -> ADD\n   -> SEARCH\n   -> EXIT" << std::endl;
     std::getline(std::cin, choice);
     return choice;
 }
+
+void displayContactDetails(PhoneBook& phoneBook)
+{
+    if (phoneBook.getSize() == 0)
+    {
+        std::cout << "No contacts available.\n";
+        return;
+    }
+
+    std::cout << "Enter index of the contact to display: ";
+    std::string input;
+    std::getline(std::cin, input);
+
+    int index = std::atoi(input.c_str());
+
+    if (input.empty() || index < 0 || index >= phoneBook.getSize())
+    {
+        std::cout << "Invalid index.\n";
+        return;
+    }
+
+    Contact& c = phoneBook.getContact(index);
+    std::cout << "First Name: " << c.getFirstName() << std::endl;
+    std::cout << "Last Name: " << c.getLastName() << std::endl;
+    std::cout << "Nickname: " << c.getNickname() << std::endl;
+    std::cout << "Phone Number: " << c.getPhoneName() << std::endl;
+    std::cout << "Darkest Secret: " << c.getDarkestSecret() << std::endl;
+}
+
 
 int validateChoice(std::string userChoice, PhoneBook &myPhoneBook)
 {
@@ -49,12 +72,15 @@ int validateChoice(std::string userChoice, PhoneBook &myPhoneBook)
             std::cout << "Contact created successfully!\n";
         }
         else
-            std::cout << "Contact creation failed.\n";
+            std::cout << "Error: All fields must be filled. Contact creation failed.\n";
+        return 1;
     }
     else if (userChoice == "SEARCH")
     {
         std::cout << "\033[2J\033[1;1H";
-        std::cout << "Search not implemented yet.\n";
+        myPhoneBook.displayContacts();
+        displayContactDetails(myPhoneBook);
+        return 1;
     }
     else if (userChoice == "EXIT")
     {
@@ -62,17 +88,20 @@ int validateChoice(std::string userChoice, PhoneBook &myPhoneBook)
         std::cout << "THANKS FOR YOUR VISIT <3" << std::endl;
         return 0;
     }
-    std::cout << "\033[2J\033[1;1H";
-    return 1;
+    else
+    {
+        std::cout << "\033[2J\033[1;1H";
+        std::cout << "Invalid choice. Please try again.\n";
+        return 1;
+    }
 }
 
-int main(int argc, char const *argv[])
+int main(void)
 {
     PhoneBook myPhoneBook;
 
     std::string userChoice = getChoice();
     while (validateChoice(userChoice, myPhoneBook) != 0)
         userChoice = getChoice();
-    myPhoneBook.displayContacts();
     return 0;
 }
