@@ -1,19 +1,19 @@
 #include "PhoneBook.hpp"
-#include <sstream>
 
 std::string formatField(const std::string& str)
-{
-    if (str.length() > 10)
+{ 
+    if (str.length() > 10) {
         return str.substr(0, 9) + ".";
+    }
 
-    std::ostringstream oss;
-    oss << std::setw(10) << std::right << str;
-    return oss.str();
+    int padding = 10 - (int)str.length();
+    std::string result(padding, ' ') ;
+    result += str;
+
+    return result;
 }
 
-PhoneBook::PhoneBook()
-    : size(0), nextIndex(0)
-{}
+PhoneBook::PhoneBook() : size(0), nextIndex(0) {}
 
 int PhoneBook::getSize(void)
 {

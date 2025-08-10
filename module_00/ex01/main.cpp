@@ -5,6 +5,7 @@ std::string getInput(const std::string& prompt)
     std::string input;
     std::cout << prompt;
     std::getline(std::cin, input);
+    input.erase(input.find_first_not_of(" \t\n\r\f\v"));
     return input;
 }
 
@@ -29,6 +30,7 @@ std::string getChoice()
     std::cout << "\n* Welcome To Your Awesome PhoneBook *" << std::endl;
     std::cout << "  ** What Do YOU need: **\n   -> ADD\n   -> SEARCH\n   -> EXIT" << std::endl;
     std::getline(std::cin, choice);
+    choice.erase(choice.find_first_not_of(" \t\n\r\f\v"));
     return choice;
 }
 
@@ -77,20 +79,17 @@ int validateChoice(std::string userChoice, PhoneBook &myPhoneBook)
     }
     else if (userChoice == "SEARCH")
     {
-        std::cout << "\033[2J\033[1;1H";
         myPhoneBook.displayContacts();
         displayContactDetails(myPhoneBook);
         return 1;
     }
     else if (userChoice == "EXIT")
     {
-        std::cout << "\033[2J\033[1;1H";
         std::cout << "THANKS FOR YOUR VISIT <3" << std::endl;
         return 0;
     }
     else
     {
-        std::cout << "\033[2J\033[1;1H";
         std::cout << "Invalid choice. Please try again.\n";
         return 1;
     }
