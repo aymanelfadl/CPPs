@@ -8,7 +8,7 @@ private:
     std::string firstName;
     std::string lastName;
     std::string nickname;
-    std::string phoneName;
+    std::string phoneNumber;
     std::string darkestSecret;
 
 public:
@@ -23,13 +23,13 @@ public:
     void setFirstName(const std::string& first);
     void setLastName(const std::string& last);
     void setNickname(const std::string& nick);
-    void setPhoneName(const std::string& phone);
+    void setphoneNumber(const std::string& phone);
     void setDarkestSecret(const std::string& secret);
 
     // Getters
     std::string getFirstName() const;
     std::string getLastName() const;
     std::string getNickname() const;
-    std::string getPhoneName() const;
+    std::string getphoneNumber() const;
     std::string getDarkestSecret() const;
 };

@@ -1,11 +1,10 @@
 #include "PhoneBook.hpp"
 
-std::string getInput(const std::string& prompt)
+std::string getInput(const std::string &prompt)
 {
     std::string input;
     std::cout << prompt;
     std::getline(std::cin, input);
-    input.erase(input.find_first_not_of(" \t\n\r\f\v"));
     return input;
 }
 
@@ -19,7 +18,7 @@ Contact getNewContact()
 
     if (first.empty() || last.empty() || nick.empty() || phone.empty() || secret.empty())
         return Contact();
-    
+
     Contact c(first, last, nick, phone, secret);
     return c;
 }
@@ -27,14 +26,20 @@ Contact getNewContact()
 std::string getChoice()
 {
     std::string choice;
-    std::cout << "\n* Welcome To Your Awesome PhoneBook *" << std::endl;
-    std::cout << "  ** What Do YOU need: **\n   -> ADD\n   -> SEARCH\n   -> EXIT" << std::endl;
+    int start, end;
+
+    std::cout << "Your Awesome PhoneBook:" << std::endl;
+    std::cout << "  CMDs::\n    -> ADD\n    -> SEARCH\n    -> EXIT\n\n:";
     std::getline(std::cin, choice);
-    choice.erase(choice.find_first_not_of(" \t\n\r\f\v"));
+
+    start = choice.find_first_not_of(" \t\n");
+    end = choice.find_last_not_of(" \t\n");
+    choice = choice.substr(start, end - start + 1);
+
     return choice;
 }
 
-void displayContactDetails(PhoneBook& phoneBook)
+void displayContactDetails(PhoneBook &phoneBook)
 {
     if (phoneBook.getSize() == 0)
     {
@@ -43,25 +48,27 @@ void displayContactDetails(PhoneBook& phoneBook)
     }
 
     std::cout << "Enter index of the contact to display: ";
+
     std::string input;
     std::getline(std::cin, input);
 
-    int index = std::atoi(input.c_str());
+    std::istringstream iStream(input);
+    int index;
 
-    if (input.empty() || index < 0 || index >= phoneBook.getSize())
+    if (!(iStream >> index) || input.empty() || index < 0 || index >= phoneBook.getSize())
     {
         std::cout << "Invalid index.\n";
         return;
     }
 
-    Contact& c = phoneBook.getContact(index);
+    Contact &c = phoneBook.getContact(index);
+
     std::cout << "First Name: " << c.getFirstName() << std::endl;
     std::cout << "Last Name: " << c.getLastName() << std::endl;
     std::cout << "Nickname: " << c.getNickname() << std::endl;
-    std::cout << "Phone Number: " << c.getPhoneName() << std::endl;
+    std::cout << "Phone Number: " << c.getphoneNumber() << std::endl;
     std::cout << "Darkest Secret: " << c.getDarkestSecret() << std::endl;
 }
-
 
 int validateChoice(std::string userChoice, PhoneBook &myPhoneBook)
 {

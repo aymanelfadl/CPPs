@@ -2,25 +2,27 @@
 
 #include "Contact.hpp"
 #include <string>
-#include <iostream>
+#include <sstream>
 #include <iomanip>
 #include <cstdlib>
+#include <iostream>
 
+#define MAX_SIZE 8
 
-std::string formatField(const std::string& str);
+std::string formatField(const std::string &str);
 
 class PhoneBook
 {
 private:
     Contact accs[8];
     int size;
-    int nextIndex;
+    int index;
 
 public:
     PhoneBook();
 
-    int getSize(void);
-    Contact& getContact(int index);
+    int getSize(void) const;
+    Contact &getContact(int index);
     void addContact(Contact c);
     void displayContacts();
 };

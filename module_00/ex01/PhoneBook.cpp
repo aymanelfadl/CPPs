@@ -1,35 +1,36 @@
 #include "PhoneBook.hpp"
 
-std::string formatField(const std::string& str)
-{ 
-    if (str.length() > 10) {
+std::string formatField(const std::string &str)
+{
+    if (str.length() > 10)
         return str.substr(0, 9) + ".";
-    }
 
     int padding = 10 - (int)str.length();
-    std::string result(padding, ' ') ;
+    std::string result(padding, ' ');
     result += str;
 
     return result;
 }
 
-PhoneBook::PhoneBook() : size(0), nextIndex(0) {}
+PhoneBook::PhoneBook() : size(0), index(0)
+{
+}
 
-int PhoneBook::getSize(void)
+int PhoneBook::getSize(void) const
 {
     return size;
 }
 
-Contact& PhoneBook::getContact(int index)
+Contact &PhoneBook::getContact(int index)
 {
     return accs[index];
 }
 
 void PhoneBook::addContact(Contact c)
 {
-    accs[nextIndex] = c;
-    nextIndex = (nextIndex + 1) % 8;
-    if (size < 8)
+    accs[index] = c;
+    index = (index + 1) % 8;
+    if (size < MAX_SIZE)
         size++;
 }
 
