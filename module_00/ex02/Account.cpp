@@ -156,5 +156,6 @@ Account::~Account()
     os << ";amount:" << _amount;
     os << ";closed";
 
+
     std::cout << os.str() << std::endl;
 }
