@@ -1,11 +1,33 @@
 #include "PhoneBook.hpp"
 
+bool valideInput(std::string input)
+{
+    for (unsigned long i = 0; i < input.size(); i++)
+    {
+        if (!isprint(input[i]))
+            return false;
+    }
+    return true;
+}
+
 std::string getInput(const std::string &prompt)
 {
     std::string input;
     std::cout << prompt;
     std::getline(std::cin, input);
+    if (!valideInput(input))
+        return "";
     return input;
+}
+
+bool isAllDigit(std::string phone)
+{
+    for (unsigned long i = 0; i < phone.size(); i++)
+    {
+        if (!isdigit(phone[i]))
+            return false;
+    }
+    return true;
 }
 
 Contact getNewContact()
@@ -16,7 +38,7 @@ Contact getNewContact()
     std::string phone = getInput("Enter Phone Number: ");
     std::string secret = getInput("Enter Darkest Secret: ");
 
-    if (first.empty() || last.empty() || nick.empty() || phone.empty() || secret.empty())
+    if (first.empty() || last.empty() || nick.empty() || phone.empty() || secret.empty() || !isAllDigit(phone))
         return Contact();
 
     Contact c(first, last, nick, phone, secret);
@@ -31,11 +53,12 @@ std::string getChoice()
     std::cout << "Your Awesome PhoneBook:" << std::endl;
     std::cout << "  CMDs::\n    -> ADD\n    -> SEARCH\n    -> EXIT\n\n:";
     std::getline(std::cin, choice);
-
-    start = choice.find_first_not_of(" \t\n");
-    end = choice.find_last_not_of(" \t\n");
-    choice = choice.substr(start, end - start + 1);
-
+    if (!choice.empty())
+    {
+        start = choice.find_first_not_of(" \t\n");
+        end = choice.find_last_not_of(" \t\n");
+        choice = choice.substr(start, end - start + 1);
+    }
     return choice;
 }
 
@@ -81,7 +104,7 @@ int validateChoice(std::string userChoice, PhoneBook &myPhoneBook)
             std::cout << "Contact created successfully!\n";
         }
         else
-            std::cout << "Error: All fields must be filled. Contact creation failed.\n";
+            std::cout << "Error: Contact creation failed.\n";
         return 1;
     }
     else if (userChoice == "SEARCH")

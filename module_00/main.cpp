@@ -1,32 +1,36 @@
 #include <iostream>
-#include <iomanip>
-
-class A
+using namespace std;
+ 
+class Tracker 
 {
-    int b;
-    int a;
-
-public:
-    A() : a(1), b(a)
-    {
-        std::cout << "a :" << a << ", b: " << b << std::endl;
-    }
-    ~A()
-    {
-        std::cout << "hey" << std::endl;
-    }
+    public:
+        static int instanceCount;
+        Tracker()
+        {
+            instanceCount++;
+        }
+        ref& operator=(const std::strging name)
+        static void printInstanceCount()
+        {
+            cout << "Instances created: " << instanceCount << endl;
+        }
 };
-
+ 
+int Tracker::instanceCount;
+int instanceCount;
+ 
 int main()
 {
-    {
-        A obj;
-    }
-    int a = 9;
-
-    std::cin >> a;
-    if (std::cin.fail())
-        return -1;
-    std::cout << std::setw(10) << std::right << a << std::endl;
+    Tracker::printInstanceCount();
+    cout <<  instanceCount << endl;
     return 0;
+}
+
+void Tracker::printInstanceCount()
+{
+
+}
+void printInstanceCount()
+{
+    
 }
