@@ -1,10 +1,10 @@
 CXX = c++
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = megaphone
+NAME = zombie
 
-SRCS = megaphone.cpp
+SRCS = main.cpp Zombie.cpp zombieHorde.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
