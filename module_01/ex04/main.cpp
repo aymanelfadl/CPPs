@@ -3,16 +3,45 @@
 
 int main(int argc, char *argv[])
 {
-    if (argc < 2)
-        return 0;
+    if (argc != 4)
+    {
+        std::cout << "Err: MachiSed <fileName> \"orgin\" \"replce\"" << std::endl;
+        return 1;
+    }
 
-    std::fstream ifStream; 
-    ifStream.open(argv[1], std::ios::in | std::ios::out);
-    if (!ifStream.is_open())
-        return 0;
+    std::string orginFileName = argv[1];
+    std::string copyFileName = argv[1];
+    copyFileName += ".replace";
+    
+    std::string s1 = argv[2];
+    std::string s2 = argv[3];
 
-    std::string word{"hey"};
-    ifStream << word;
+    std::ifstream ifs(orginFileName.c_str());
+    if (!ifs.is_open())
+    {
+        std::cout << "Err: Failed to open the file" << std::endl;
+        return 1;
+    }
 
-    return 1;
+    std::ofstream ofs(copyFileName.c_str());
+    if (!ofs.is_open())
+    {
+        std::cout << "Err: Failed to open the file" << std::endl;
+        return 1;
+    }
+
+    std::string line;
+    size_t pos;
+    while (std::getline(ifs, line))
+    {
+        pos = line.find(s1);
+        while (pos != std::string::npos)
+        {
+            line.erase(pos, s1.length());
+            line.insert(pos, s2);
+            pos = line.find(s1, pos + 1);
+        }
+        ofs << line + "\n";
+    }
+    return 0;
 }
