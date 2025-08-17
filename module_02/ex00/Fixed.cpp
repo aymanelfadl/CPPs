@@ -1,6 +1,6 @@
 #include "Fixed.hpp"
 
-const int Fixed::bits = 8;
+int const Fixed::bits = 0;
 
 Fixed::Fixed() : fixedPointValue(0)
 {

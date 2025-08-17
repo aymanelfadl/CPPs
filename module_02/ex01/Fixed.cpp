@@ -59,7 +59,7 @@ void Fixed::setRawBits(int const raw)
 
 int Fixed::toInt() const
 {
-    return (this->fixedPointValue / 255);
+    return this->fixedPointValue / 255;
 }
 
 float Fixed::toFloat() const
