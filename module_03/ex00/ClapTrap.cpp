@@ -11,20 +11,6 @@ ClapTrap::~ClapTrap()
     std::cout << this->name << " has been removed." << std::endl;
 }
 
-static std::string getMessage(const ClapTrap& player, const std::string& target, int type)
-{
-    std::ostringstream os;
-
-    if (type == ATTACK)
-    {
-        os << "ClapTrap " << player.getName();
-        os << " attacks " << target;
-        os << ", causing " << player.getDamage();
-        os << " points of damage!";
-    }
-    return os.str();
-}
-
 void ClapTrap::attack(const std::string& target)
 {
     if (this->energy <= 0)
@@ -32,13 +18,56 @@ void ClapTrap::attack(const std::string& target)
         std::cout << "ClapTrap " << this->name << " is out of energy and cannot attack!" << std::endl;
         return;
     }
-    std::cout << getMessage(*this, target, ATTACK) << std::endl;
-    this->setEnergy((this->getEnergy() - 1));
+    
+    std::ostringstream os;
+    os << "ClapTrap " << this->getName();
+    os << " attacks " << target;
+    os << ", causing " << this->getDamage();
+    os << " points of damage!";
 
+    std::cout << os.str() << std::endl;
+
+    this->setEnergy((this->getEnergy() - 1));
 }
 
+void ClapTrap::beRepaired(unsigned int amount)
+{
+    if (this->energy <= 0)
+    {
+        std::cout << "ClapTrap " << this->name << " is out of energy and cannot repairs itself!" << std::endl;
+        return;
+    }
 
+    std::ostringstream os;
+    os << "ClapTrap " << this->getName();
+    os << " heals for " << amount;
+    os << " hit points!";
 
+    std::cout << os.str() << std::endl;
+
+    int neededHealth = 10 - this->getHealth();
+    if ((int)amount <= neededHealth)
+        this->setHealth(this->getHealth() + amount);
+    else
+        this->setHealth(10);
+
+    this->setEnergy((this->getEnergy() - 1));
+}
+
+void ClapTrap::takeDamage(unsigned int amount)
+{
+    std::ostringstream os;
+    os << "ClapTrap " << this->getName();
+    os << " takes " << amount;
+    os << " points of damage!";
+
+    std::cout << os.str() << std::endl;
+    int damageTaken = this->getHealth() - amount;
+    if (damageTaken >= 0)
+        this->setHealth(damageTaken);
+    else
+        this->setHealth(0);
+}
 
 
 std::string ClapTrap::getName() const { return this->name; }

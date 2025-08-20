@@ -3,10 +3,6 @@
 #include <iostream>
 #include <sstream>
 
-#define ATTACK 0
-#define TAKE_DMG 1
-#define HEALING 2
-
 class ClapTrap
 {
 private:
