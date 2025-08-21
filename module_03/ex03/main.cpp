@@ -1,43 +1,53 @@
-#include "FragTrap.hpp"
+#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
+
+
+
 
 int main()
 {
-    ClapTrap clap("Clappy");
-    ScavTrap scav("Scavvy");
-    FragTrap frag("Fraggy");
+    // ClapTrap clap("Clappy");
+    // ScavTrap scav("Scavvy");
+    // FragTrap frag("Fraggy");
+    DiamondTrap diamond("D1");
 
-    std::cout << "\n--- Battle Start ---\n"
-              << std::endl;
+    // std::cout << "\n--- Battle Start ---\n\n";
 
-    clap.setDamage(2);
-    clap.attack(scav.getName());
-    scav.takeDamage(clap.getDamage());
+    // clap.setDamage(2);
+    // clap.attack(scav.getName());
+    // scav.takeDamage(clap.getDamage());
+    // std::cout << scav.getName() << " health: " << scav.getHealth() << "\n\n";
 
-    std::cout << scav.getName() << " health: " << scav.getHealth() << std::endl;
+    // scav.beRepaired(5);
+    // std::cout << scav.getName() << " health after healing: " << scav.getHealth() << "\n\n";
 
-    scav.beRepaired(5);
-    std::cout << scav.getName() << " health after healing: " << scav.getHealth() << std::endl;
+    // scav.setDamage(8);
+    // scav.attack(clap.getName());
+    // clap.takeDamage(scav.getDamage());
+    // std::cout << clap.getName() << " health: " << clap.getHealth() << "\n\n";
 
-    scav.setDamage(8);
-    scav.attack(clap.getName());
-    clap.takeDamage(scav.getDamage());
+    // scav.guardGate();
 
-    std::cout << clap.getName() << " health: " << clap.getHealth() << std::endl;
+    // std::cout << "--- FragTrap Action ---\n\n";
 
+    // frag.setDamage(10);
+    // frag.attack(clap.getName());
+    // clap.takeDamage(frag.getDamage());
+    // std::cout << clap.getName() << " health after FragTrap attack: " << clap.getHealth() << "\n\n";
 
-    scav.guardGate();
+    // frag.highFivesGuys();
 
-    std::cout << "\n--- FragTrap Action ---\n" << std::endl;
+    // std::cout << "--- DiamondTrap Action ---\n\n";
 
-    frag.setDamage(10);
-    frag.attack(clap.getName());
-    clap.takeDamage(frag.getDamage());
-    std::cout << clap.getName() << " health after FragTrap attack: " << clap.getHealth() << std::endl;
+    // diamond.attack(scav.getName());
+    // scav.takeDamage(diamond.getDamage());
+    // diamond.beRepaired(5);
 
-    frag.highFivesGuys();
+    // diamond.whoAmI(); // shows both DiamondTrap name and ClapTrap base name
 
-    std::cout << "\n--- Battle End ---\n" << std::endl;
+    // std::cout << "\n--- Battle End ---\n" << std::endl;
 
     return 0;
 }
