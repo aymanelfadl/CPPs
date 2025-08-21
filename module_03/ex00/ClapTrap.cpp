@@ -3,12 +3,12 @@
 ClapTrap::ClapTrap(const std::string _name)
     : name(_name), health(10), energy(10), attackDamage(0)
 {
-    std::cout << this->name << " has been created." << std::endl;
+    std::cout << this->name << " has been created. [ClapTrap]" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << this->name << " has been removed." << std::endl;
+    std::cout << this->name << " has been removed. [ClapTrap]" << std::endl;
 }
 
 void ClapTrap::attack(const std::string& target)

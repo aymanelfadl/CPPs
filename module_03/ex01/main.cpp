@@ -1,23 +1,33 @@
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main()
 {
-    ClapTrap bot1("Alpha");
-    ClapTrap bot2("Bravo");
+    ClapTrap clap("Clappy");
+    ScavTrap scav("Scavvy");
 
     std::cout << "\n--- Battle Start ---\n" << std::endl;
 
-    bot1.setDamage(3); 
-    bot1.attack(bot2.getName());
-    bot2.takeDamage(bot1.getDamage());
+    // ClapTrap attacks ScavTrap
+    clap.setDamage(2);
+    clap.attack(scav.getName());
+    scav.takeDamage(clap.getDamage());
 
-    std::cout << "\n" << bot2.getName() << " health: " << bot2.getHealth() << std::endl;
+    std::cout << scav.getName() << " health: " << scav.getHealth() << "\n" << std::endl;
 
-    bot2.beRepaired(5);
-    std::cout << bot2.getName() << " health after healing: " << bot2.getHealth() << std::endl;
+    // ScavTrap repairs itself
+    scav.beRepaired(5);
+    std::cout << scav.getName() << " health after healing: " << scav.getHealth() << "\n" << std::endl;
 
-    bot2.attack(bot1.getName());
-    bot1.takeDamage(bot2.getDamage());
+    // ScavTrap attacks ClapTrap
+    scav.setDamage(8);
+    scav.attack(clap.getName());
+    clap.takeDamage(scav.getDamage());
+
+    std::cout << clap.getName() << " health: " << clap.getHealth() << "\n" << std::endl;
+
+    // Special ability of ScavTrap
+    scav.guardGate();
 
     std::cout << "\n--- Battle End ---\n" << std::endl;
 
