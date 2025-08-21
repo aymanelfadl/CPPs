@@ -1,7 +1,7 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(const std::string _name)
-    : name(_name), health(10), energy(10), attackDamage(0)
+    : name(_name), health(10), maxHealth(10), energy(10), attackDamage(0)
 {
     std::cout << this->name << " has been created. [ClapTrap]" << std::endl;
 }
@@ -45,11 +45,11 @@ void ClapTrap::beRepaired(unsigned int amount)
 
     std::cout << os.str() << std::endl;
 
-    int neededHealth = 10 - this->getHealth();
+    int neededHealth = this->getMaxHealth() - this->getHealth();
     if ((int)amount <= neededHealth)
         this->setHealth(this->getHealth() + amount);
     else
-        this->setHealth(10);
+        this->setHealth(this->getMaxHealth());
 
     this->setEnergy((this->getEnergy() - 1));
 }
@@ -74,8 +74,10 @@ std::string ClapTrap::getName() const { return this->name; }
 int ClapTrap::getHealth() const { return this->health; }
 int ClapTrap::getEnergy() const { return this->energy; }
 int ClapTrap::getDamage() const { return this->attackDamage; }
+int ClapTrap::getMaxHealth() const { return this->maxHealth; }
 
 void ClapTrap::setName(const std::string& newName) { this->name = newName; }
 void ClapTrap::setHealth(int newHealth) { this->health = newHealth; }
 void ClapTrap::setEnergy(int newEnergy) { this->energy = newEnergy; }
 void ClapTrap::setDamage(int newDamage) { this->attackDamage = newDamage; }
+void ClapTrap::setMaxHealth(int max) { this->maxHealth = max; }

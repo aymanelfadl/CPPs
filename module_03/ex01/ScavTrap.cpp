@@ -3,6 +3,7 @@
 ScavTrap::ScavTrap(const std::string _name) : ClapTrap(_name)
 {
     std::cout << this->getName() << " has been created. [ScavTrap]" << std::endl;
+    this->setMaxHealth(100);
     this->setHealth(100);
     this->setEnergy(50);
     this->setDamage(20);
