@@ -3,9 +3,6 @@
 #include "FragTrap.hpp"
 #include "DiamondTrap.hpp"
 
-
-
-
 int main()
 {
     // ClapTrap clap("Clappy");
