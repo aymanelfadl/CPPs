@@ -1,8 +1,7 @@
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap(const std::string& _name) : ClapTrap(_name), FragTrap(_name), ScavTrap(_name), name(_name) 
+DiamondTrap::DiamondTrap(const std::string &_name) : ClapTrap(_name + "_clap_name"), FragTrap(_name), ScavTrap(_name), name(_name)
 {
-    std::cout << _name << std::endl;
     std::cout << this->name << " has been created. [DiamondTrap]" << std::endl;
 
     this->setHealth(FragTrap::getHealth());
@@ -13,10 +12,10 @@ DiamondTrap::DiamondTrap(const std::string& _name) : ClapTrap(_name), FragTrap(_
 
 DiamondTrap::~DiamondTrap()
 {
-    std::cout << this->getName() << " has been removed. [DiamondTrap]" << std::endl;
+    std::cout << this->name << " has been removed. [DiamondTrap]" << std::endl;
 }
 
-void DiamondTrap::attack(const std::string& target)
+void DiamondTrap::attack(const std::string &target)
 {
     ScavTrap::attack(target);
 }

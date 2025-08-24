@@ -11,14 +11,14 @@ ClapTrap::~ClapTrap()
     std::cout << this->name << " has been removed. [ClapTrap]" << std::endl;
 }
 
-void ClapTrap::attack(const std::string& target)
+void ClapTrap::attack(const std::string &target)
 {
     if (this->energy <= 0)
     {
         std::cout << "ClapTrap " << this->name << " is out of energy and cannot attack!" << std::endl;
         return;
     }
-    
+
     std::ostringstream os;
     os << "ClapTrap " << this->getName();
     os << " attacks " << target;
@@ -69,14 +69,13 @@ void ClapTrap::takeDamage(unsigned int amount)
         this->setHealth(0);
 }
 
-
 std::string ClapTrap::getName() const { return this->name; }
 int ClapTrap::getHealth() const { return this->health; }
 int ClapTrap::getEnergy() const { return this->energy; }
 int ClapTrap::getDamage() const { return this->attackDamage; }
 int ClapTrap::getMaxHealth() const { return this->maxHealth; }
 
-void ClapTrap::setName(const std::string& newName) { this->name = newName; }
+void ClapTrap::setName(const std::string &newName) { this->name = newName; }
 void ClapTrap::setHealth(int newHealth) { this->health = newHealth; }
 void ClapTrap::setEnergy(int newEnergy) { this->energy = newEnergy; }
 void ClapTrap::setDamage(int newDamage) { this->attackDamage = newDamage; }
