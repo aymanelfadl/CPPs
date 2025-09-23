@@ -2,7 +2,7 @@
 
 bool valideInput(std::string input)
 {
-    for (unsigned long i = 0; i < input.size(); i++)
+    for (int i = 0; i < (int)input.length(); i++)
     {
         if (!isprint(input[i]))
             return false;
@@ -22,7 +22,7 @@ std::string getInput(const std::string &prompt)
 
 bool isAllDigit(std::string phone)
 {
-    for (unsigned long i = 0; i < phone.size(); i++)
+    for (int i = 0; i < (int)phone.length(); i++)
     {
         if (!isdigit(phone[i]))
             return false;
@@ -39,10 +39,9 @@ Contact getNewContact()
     std::string secret = getInput("Enter Darkest Secret: ");
 
     if (first.empty() || last.empty() || nick.empty() || phone.empty() || secret.empty() || !isAllDigit(phone))
-        return Contact();
+        return Contact ();
 
-    Contact c(first, last, nick, phone, secret);
-    return c;
+    return Contact (first, last, nick, phone, secret);
 }
 
 std::string getChoice()

@@ -1,15 +1,10 @@
 #pragma once
 
 #include "Contact.hpp"
-#include <string>
 #include <sstream>
-#include <iomanip>
-#include <cstdlib>
 #include <iostream>
 
 #define MAX_SIZE 8
-
-std::string formatField(const std::string &str);
 
 class PhoneBook
 {
