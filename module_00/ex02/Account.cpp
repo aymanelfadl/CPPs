@@ -1,5 +1,6 @@
 #include "Account.hpp"
 
+// Utils ::
 static std::string formatDate()
 {
     time_t now = time(NULL);
