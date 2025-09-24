@@ -11,10 +11,14 @@ int main()
     std::cout << "Pointer Adress: " << &stringPTR << std::endl;
     std::cout << "Reference Adress: " << &stringREF << std::endl;
 
-    // stringREF = "hey";
+    // stringREF = "Hey !!!";
+    // std::string str = "ok";
+    // stringREF = str;
+    
     std::cout << "Variable Value: " << brain << std::endl;
     std::cout << "Pointer Value: " << *stringPTR << std::endl;
     std::cout << "Referebce Value: " << stringREF << std::endl;
+
 
     
 }

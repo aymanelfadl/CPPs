@@ -21,25 +21,27 @@ int main(int argc, char *argv[])
     switch (index)
     {
     case 0:
-        std::cout << "[ " + complians[index] + " ]" << std::endl;
+        std::cout << "[ " << complians[index] << " ]" << std::endl;
         h.complain(complians[index]);
         index++;
+        // fall through
     case 1:
-        std::cout << "[ " + complians[index] + " ]" << std::endl;
+        std::cout << "[ " << complians[index] << " ]" << std::endl;
         h.complain(complians[index]);
         index++;
+        // fall through
     case 2:
-        std::cout << "[ " + complians[index] + " ]" << std::endl;
+        std::cout << "[ " << complians[index] << " ]" << std::endl;
         h.complain(complians[index]);
         index++;
+        // fall through
     case 3:
-        std::cout << "[ " + complians[index] + " ]" << std::endl;
+        std::cout << "[ " << complians[index] << " ]" << std::endl;
         h.complain(complians[index]);
-        index++;
         break;
     default:
         std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
         break;
     }
-    return 0;
+   return 0;
 }
