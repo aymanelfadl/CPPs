@@ -5,7 +5,7 @@ int main()
     Point A(0, 0);
     Point B(10, 0);
     Point C(5, 10);
-    Point P(5, -111);
+    Point P(2, 2);
 
     if (bsp(A, B, C, P))
         std::cout << "Point is inside the triangle" << std::endl;

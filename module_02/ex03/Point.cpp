@@ -11,9 +11,11 @@ Point::Point(const Point &p)
 
 Point &Point::operator=(const Point &p)
 {
+    if (this == &p)
+        return *this;
+    
     this->x = p.x;
     this->y = p.y;
-
     return (*this);
 }
 
