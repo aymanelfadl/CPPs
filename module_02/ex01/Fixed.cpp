@@ -1,6 +1,6 @@
 #include "Fixed.hpp"
 
-int const Fixed::bits = 0;
+int const Fixed::bits = 8;
 
 Fixed::Fixed() : fixedPointValue(0)
 {
@@ -10,13 +10,13 @@ Fixed::Fixed() : fixedPointValue(0)
 Fixed::Fixed(const int _fixedPointValue)
 {
     std::cout << "Int constructor called" << std::endl;
-    this->fixedPointValue = _fixedPointValue * 255;
+    this->fixedPointValue = _fixedPointValue << bits;
 };
 
 Fixed::Fixed(const float _fixedPointValue)
 {
     std::cout << "Float constructor called" << std::endl;
-    this->fixedPointValue = _fixedPointValue * 255;
+    this->fixedPointValue = roundf(_fixedPointValue * (1 << bits));
 };
 
 Fixed::~Fixed() {
@@ -59,10 +59,10 @@ void Fixed::setRawBits(int const raw)
 
 int Fixed::toInt() const
 {
-    return this->fixedPointValue / 255;
+    return this->fixedPointValue >> bits;
 }
 
 float Fixed::toFloat() const
 {
-    return (float)this->fixedPointValue / 255;
+    return (float)this->fixedPointValue / (1 << bits);
 }
