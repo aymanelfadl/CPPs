@@ -2,6 +2,28 @@
 
 int const Fixed::bits = 8;
 
+const Fixed &Fixed::min(const Fixed &fixed1, const Fixed &fixed2)
+{
+    if (fixed1 < fixed2)
+        return fixed1;
+    return fixed2;
+}
+
+Fixed &Fixed::min(Fixed &fixed1, Fixed &fixed2)
+{
+    if (fixed1 < fixed2)
+        return fixed1;
+    return fixed2;
+}
+
+
+Fixed &Fixed::max(Fixed &fixed1, Fixed &fixed2)
+{
+    if (fixed1 < fixed2)
+        return fixed2;
+    return fixed1;
+}
+
 const Fixed &Fixed::max(const Fixed &fixed1, const Fixed &fixed2)
 {
     if (fixed1 < fixed2)
@@ -17,13 +39,13 @@ Fixed::Fixed() : fixedPointValue(0)
 Fixed::Fixed(const int _fixedPointValue)
 {
     std::cout << "Int constructor called" << std::endl;
-    this->fixedPointValue = _fixedPointValue * (1 << bits);
+    this->fixedPointValue = _fixedPointValue << bits;
 };
 
 Fixed::Fixed(const float _fixedPointValue)
 {
     std::cout << "Float constructor called" << std::endl;
-    this->fixedPointValue = _fixedPointValue * (1 << bits);
+    this->fixedPointValue = roundf(_fixedPointValue * (1 << bits));
 };
 
 Fixed::~Fixed()
@@ -150,7 +172,7 @@ void Fixed::setRawBits(int const raw)
 
 int Fixed::toInt() const
 {
-    return this->fixedPointValue / (1 << bits);
+    return this->fixedPointValue >> bits;
 }
 
 float Fixed::toFloat() const
