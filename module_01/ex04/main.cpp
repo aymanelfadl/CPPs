@@ -15,7 +15,11 @@ int main(int argc, char *argv[])
     
     std::string s1 = argv[2];
     std::string s2 = argv[3];
-
+    if (s1.empty())
+    {
+        std::cout << "Error: \"origin\" must not be empty." << std::endl;
+        return 1;
+    }
     std::ifstream ifs(orginFileName.c_str());
     if (!ifs.is_open())
     {
@@ -39,7 +43,7 @@ int main(int argc, char *argv[])
         {
             line.erase(pos, s1.length());
             line.insert(pos, s2);
-            pos = line.find(s1, pos + 1);
+            pos = line.find(s1, pos + s2.length());
         }
         ofs << line + "\n";
     }

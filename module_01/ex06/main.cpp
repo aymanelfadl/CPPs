@@ -4,7 +4,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        std::cout << "Error: too many complains" << std::endl;
+        std::cout << "Error: (--)" << std::endl;
         return 1;
     }
 
@@ -24,17 +24,14 @@ int main(int argc, char *argv[])
         std::cout << "[ " << complians[index] << " ]" << std::endl;
         h.complain(complians[index]);
         index++;
-        // fall through
     case 1:
         std::cout << "[ " << complians[index] << " ]" << std::endl;
         h.complain(complians[index]);
         index++;
-        // fall through
     case 2:
         std::cout << "[ " << complians[index] << " ]" << std::endl;
         h.complain(complians[index]);
         index++;
-        // fall through
     case 3:
         std::cout << "[ " << complians[index] << " ]" << std::endl;
         h.complain(complians[index]);
