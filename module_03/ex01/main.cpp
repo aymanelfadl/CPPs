@@ -7,20 +7,18 @@ int main()
 
     std::cout << "\n--- Battle Start ---\n" << std::endl;
 
-    clap.setDamage(2);
     clap.attack(scav.getName());
     scav.takeDamage(clap.getDamage());
 
     std::cout << scav.getName() << " health: " << scav.getHealth() << "\n" << std::endl;
 
-    scav.beRepaired(5);
-    std::cout << scav.getName() << " health after healing: " << scav.getHealth() << "\n" << std::endl;
-
     scav.setDamage(8);
     scav.attack(clap.getName());
     clap.takeDamage(scav.getDamage());
-
     std::cout << clap.getName() << " health: " << clap.getHealth() << "\n" << std::endl;
+
+    clap.beRepaired(5);
+    std::cout << clap.getName() << " health after healing: " << clap.getHealth() << "\n" << std::endl;
 
     scav.guardGate();
 

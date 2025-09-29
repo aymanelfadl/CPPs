@@ -6,7 +6,6 @@ class Fixed
 {
     private:
         int fixedPointValue;
-        
         const static int  bits;
 
     public:

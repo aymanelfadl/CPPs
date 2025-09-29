@@ -2,12 +2,12 @@
 
 int main()
 {
-    ClapTrap bot1("Alpha");
-    ClapTrap bot2("Bravo");
+    ClapTrap bot1("bot_1");
+    ClapTrap bot2("bot_2");
 
     std::cout << "\n--- Battle Start ---\n" << std::endl;
 
-    bot1.setDamage(3); 
+    // bot1.setDamage(3); 
     bot1.attack(bot2.getName());
     bot2.takeDamage(bot1.getDamage());
 

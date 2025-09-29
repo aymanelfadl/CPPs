@@ -1,5 +1,10 @@
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap(): ClapTrap()
+{
+    std::cout << "Useless ScavTrap has been created. [ScavTrap]" << std::endl;
+}
+
 ScavTrap::ScavTrap(const std::string _name) : ClapTrap(_name)
 {
     std::cout << this->getName() << " has been created. [ScavTrap]" << std::endl;
@@ -7,6 +12,20 @@ ScavTrap::ScavTrap(const std::string _name) : ClapTrap(_name)
     this->setHealth(100);
     this->setEnergy(50);
     this->setDamage(20);
+}
+
+ScavTrap::ScavTrap(const ScavTrap &obj) : ClapTrap(obj)
+{
+    std::cout << this->getName() << " has been created. [ScavTrap]" << std::endl;
+}
+
+
+ScavTrap& ScavTrap::operator=(const ScavTrap &obj)
+{
+    if (this == &obj)
+        return *this;
+    ClapTrap::operator=(obj);
+    return *this;
 }
 
 ScavTrap::~ScavTrap()
