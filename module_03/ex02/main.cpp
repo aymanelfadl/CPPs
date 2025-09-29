@@ -3,46 +3,40 @@
 
 int main()
 {
-    // ClapTrap clap("Clappy");
-    // ScavTrap scav("Scavvy");
-    // FragTrap frag("Fraggy");
+    ClapTrap clap("Clappy");
+    ScavTrap scav("Scavvy");
+    FragTrap frag("Fraggy");
 
-    // std::cout << "\n--- Battle Start ---\n"
-    //           << std::endl;
+    std::cout << "\n--- Battle Start ---\n"
+              << std::endl;
 
-    // clap.attack(scav.getName());
-    // scav.takeDamage(clap.getDamage());
+    clap.attack(scav.getName());
+    scav.takeDamage(clap.getDamage());
 
-    // std::cout << scav.getName() << " health: " << scav.getHealth() << std::endl;
+    std::cout << scav.getName() << " health: " << scav.getHealth() << std::endl;
 
-    // scav.beRepaired(5);
-    // std::cout << scav.getName() << " health after healing: " << scav.getHealth() << std::endl;
+    scav.beRepaired(5);
+    std::cout << scav.getName() << " health after healing: " << scav.getHealth() << std::endl;
 
-    // scav.setDamage(8);
-    // scav.attack(clap.getName());
-    // clap.takeDamage(scav.getDamage());
+    scav.setDamage(8);
+    scav.attack(clap.getName());
+    clap.takeDamage(scav.getDamage());
 
-    // std::cout << clap.getName() << " health: " << clap.getHealth() << std::endl;
+    std::cout << clap.getName() << " health: " << clap.getHealth() << std::endl;
 
 
-    // scav.guardGate();
+    scav.guardGate();
 
-    // std::cout << "\n--- FragTrap Action ---\n" << std::endl;
+    std::cout << "\n--- FragTrap Action ---\n" << std::endl;
 
-    // frag.setDamage(10);
-    // frag.attack(clap.getName());
-    // clap.takeDamage(frag.getDamage());
-    // std::cout << clap.getName() << " health after FragTrap attack: " << clap.getHealth() << std::endl;
+    frag.setDamage(10);
+    frag.attack(clap.getName());
+    clap.takeDamage(frag.getDamage());
+    std::cout << clap.getName() << " health after FragTrap attack: " << clap.getHealth() << std::endl;
 
-    // frag.highFivesGuys();
+    frag.highFivesGuys();
 
-    // std::cout << "\n--- Battle End ---\n" << std::endl;
-
-    FragTrap trap;
-    FragTrap frag(trap);
-
-    
-
+    std::cout << "\n--- Battle End ---\n" << std::endl;
 
     return 0;
 }
