@@ -5,21 +5,25 @@
 
 class ClapTrap
 {
-protected:
+private:
     std::string name;
     int health;
-    int maxHealth; 
+    int maxHealth;
     int energy;
     int attackDamage;
 
 public:
+    ClapTrap();
+    ClapTrap(const ClapTrap &obj);
     ClapTrap(const std::string _name);
     ~ClapTrap();
 
+    ClapTrap& operator=(const ClapTrap &obj);
     void attack(const std::string& target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
-    
+
+
     std::string getName() const;
     int getHealth() const;
     int getEnergy() const;
@@ -31,5 +35,6 @@ public:
     void setEnergy(int newEnergy);
     void setDamage(int newDamage);
     void setMaxHealth(int max);
+
     
 };

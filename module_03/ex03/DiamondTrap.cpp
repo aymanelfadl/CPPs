@@ -6,8 +6,9 @@ DiamondTrap::DiamondTrap(const std::string &_name) : ClapTrap(_name + "_clap_nam
 
     this->setHealth(FragTrap::getHealth());
     this->setMaxHealth(FragTrap::getMaxHealth());
-    this->setEnergy(ScavTrap::getEnergy());
     this->setDamage(FragTrap::getDamage());
+    
+    this->setEnergy(ScavTrap::getEnergy());
 }
 
 DiamondTrap::~DiamondTrap()

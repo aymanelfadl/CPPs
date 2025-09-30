@@ -1,9 +1,33 @@
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap() : name(""), health(0), maxHealth(0), energy(0), attackDamage(0)
+{
+    std::cout << "Useless ClapTrap has been created. [ClapTrap]" << std::endl;
+}
+
 ClapTrap::ClapTrap(const std::string _name)
     : name(_name), health(10), maxHealth(10), energy(10), attackDamage(0)
 {
     std::cout << this->name << " has been created. [ClapTrap]" << std::endl;
+    }
+
+ClapTrap::ClapTrap(const ClapTrap &obj)
+{
+    *this = obj;
+    std::cout << this->name << " has been created. [ClapTrap]" << std::endl;
+}
+
+ClapTrap& ClapTrap::operator=(const ClapTrap &obj)
+{
+    if (this == &obj)
+        return *this;
+
+    this->name = obj.name;
+    this->health = obj.health;
+    this->maxHealth = obj.maxHealth;
+    this->energy = obj.energy;
+    this->attackDamage = obj.attackDamage;
+    return *this;
 }
 
 ClapTrap::~ClapTrap()

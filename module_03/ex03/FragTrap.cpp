@@ -1,5 +1,15 @@
 #include "FragTrap.hpp"
 
+FragTrap::FragTrap() : ClapTrap()
+{
+    std::cout << "Useless FragTrap has been created. [FragTrap]" << std::endl;
+}
+
+FragTrap::FragTrap(const FragTrap& obj) : ClapTrap(obj)
+{
+    std::cout << this->getName() << " has been created. [FragTrap]" << std::endl;
+}
+
 FragTrap::FragTrap(const std::string &_name) : ClapTrap(_name)
 {
     std::cout << this->getName() << " has been created. [FragTrap]" << std::endl;
@@ -7,6 +17,14 @@ FragTrap::FragTrap(const std::string &_name) : ClapTrap(_name)
     this->setHealth(100);
     this->setEnergy(100);
     this->setDamage(20);
+}
+
+FragTrap& FragTrap::operator=(const FragTrap& obj)
+{
+    if (this == &obj)
+        return *this;
+    ClapTrap::operator=(obj);    
+    return *this;   
 }
 
 void FragTrap::attack(const std::string &target)
