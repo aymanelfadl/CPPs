@@ -8,11 +8,11 @@ public:
   Animal();
   Animal(const Animal &obj);
   Animal &operator=(const Animal &obj);
-  virtual ~Animal();
+  ~Animal();
 
   std::string getType() const;
   
-  virtual void makeSound() const;
+  void makeSound() const;
 
 protected:
   std::string type;

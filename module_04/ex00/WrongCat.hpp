@@ -3,8 +3,6 @@
 #include "Animal.hpp"
 
 class Cat : public Animal {
-  private: 
-  int x;
 public:
   
   Cat();

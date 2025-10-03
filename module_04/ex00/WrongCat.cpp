@@ -2,7 +2,6 @@
 
 Cat::Cat() {
   this->type = "Cat";
-  this->x = 10;
   std::cout << "Cat has been created" << std::endl;
 }
 
