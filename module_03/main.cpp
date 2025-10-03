@@ -2,8 +2,9 @@
 
 class  A
 {
-public:
+private:
     int x;
+public:
     A(){};
     A(int _x)
     {
@@ -21,10 +22,12 @@ public:
 
 int main()
 {
-    A a(9);
-    A b;
-
-    b = a;
-
-    std::cout << b.x;
+    for(int i = 0 ; i < 9 ; i++)
+    {
+        for (int i = 0; i < 1; i++)
+        {
+            std::cout << "hey";
+        }
+        std::cout << std::endl;
+    }
 }
