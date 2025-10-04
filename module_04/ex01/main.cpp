@@ -3,15 +3,42 @@
 
 int main()
 {
-    const Animal *j = new Dog();
-    const Animal *i = new Cat();
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
-    i->makeSound(); // will output the cat sound!
-    j->makeSound();
+    const Animal* Zoo[10];
 
-    delete j;
-    delete i;
+    for (int i = 0; i < 10; i++)
+    {
+        if (i < 5)
+            Zoo[i] = new Dog();
+        else
+            Zoo[i] = new Cat();
+    }
 
-    return 0;
+    for (int i = 0; i < 10; ++i)
+    {
+        Zoo[i]->makeSound();
+        delete Zoo[i];
+    }
+
+    // {
+        // std::string arr[100] = {};
+        // arr[0] = "hey";
+        // arr[1] = "hola";
+        // arr[2] = "hahah";
+
+        // std::cout << "--- Create Dog a ---" << std::endl;
+        // Dog a;
+
+        // a.getBrain()->setIdeas(arr);
+        // for (int i = 0; i < 3; i++)
+        //     std::cout << a.getBrain()->getIdeas()[i] << std::endl;
+
+        // std::cout << "--- Copy Dog b from a ---" << std::endl;
+        // Dog b(a);
+        // for (int i = 0; i < 3; i++)
+        //     std::cout << a.getBrain()->getIdeas()[i] << std::endl;
+
+        // std::cout << "--- Addresses of brains ---" << std::endl;
+        // std::cout << "a brain: " << a.getBrain() << std::endl;
+        // std::cout << "b brain: " << b.getBrain() << std::endl;       
+    // }
 }
