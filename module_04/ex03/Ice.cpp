@@ -10,7 +10,7 @@ Ice::Ice(const std::string &type) : AMateria(type) {
     this->type = type;
 }
 
-Ice::Ice(const Ice &obj) {
+Ice::Ice(const Ice &obj) : AMateria(obj) {
     std::cout << "Ice has been created." << std::endl;
     *this = obj;
 }
