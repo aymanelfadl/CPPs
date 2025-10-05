@@ -8,6 +8,7 @@ MateriaSource::MateriaSource() {
 }
 
 MateriaSource::MateriaSource(const MateriaSource &obj) {
+    this->inventory = new AMateria*[4];
     *this = obj;
     std::cout << "MateriaSource has been created." << std::endl;
 }
@@ -16,9 +17,19 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &obj)
 {
     if (this == &obj)
         return *this;
-    this->inventory = new AMateria*[4];
+
     for (int i = 0; i < 4; i++)
-        inventory[i] = obj.inventory[i];
+        delete this->inventory[i];
+    delete[] this->inventory;
+
+    this->inventory = new AMateria*[4];
+    for (int i = 0; i < 4; i++) {
+        if (obj.inventory[i])
+            this->inventory[i] = obj.inventory[i]->clone();
+        else
+            this->inventory[i] = NULL;
+    }
+
     return *this;    
 }
 
@@ -30,6 +41,8 @@ MateriaSource::~MateriaSource() {
 }
 
 void MateriaSource::learnMateria(AMateria *obj) {
+    if (!obj)
+        return ;
     for (int i = 0; i < 4; i++) {
         if (this->inventory[i] == NULL) {
             this->inventory[i] = obj->clone();
@@ -37,6 +50,7 @@ void MateriaSource::learnMateria(AMateria *obj) {
             return ;
         }
     }
+    delete obj;
 }
 
 AMateria* MateriaSource::createMateria(std::string const &type) {

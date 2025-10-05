@@ -18,6 +18,7 @@ Character::Character(const std::string name) {
 }
 
 Character::Character(const Character &obj) {
+    this->inventory = new AMateria*[4];
     *this = obj;
     std::cout << "The " << this->name << " character has been created." << std::endl;
 }
@@ -27,11 +28,22 @@ Character& Character::operator=(const Character &obj) {
         return *this;
 
     this->name = obj.name;
-    this->inventory = new AMateria*[4];
+
     for (int i = 0; i < 4; i++)
-        this->inventory[i] = obj.inventory[i];
-    return *this;   
+        delete this->inventory[i];
+    delete[] this->inventory;
+
+    this->inventory = new AMateria*[4];
+    for (int i = 0; i < 4; i++) {
+        if (obj.inventory[i])
+            this->inventory[i] = obj.inventory[i]->clone();
+        else
+            this->inventory[i] = NULL;
+    }
+
+    return *this;
 }
+
 
 Character::~Character() {
     std::cout << "this " << this->name << " has been destroyed" << std::endl;
@@ -45,6 +57,8 @@ Character::~Character() {
 std::string const &Character::getName() const { return this->name; }
 
 void Character::equip(AMateria *m) {
+    if (!m)
+        return ;
     for (int i = 0; i < 4; i++) {
         if (this->inventory[i] == m)
             return ;
