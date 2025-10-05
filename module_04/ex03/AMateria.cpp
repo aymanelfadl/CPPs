@@ -20,7 +20,7 @@ AMateria& AMateria::operator=(const AMateria &obj) {
 }
 
 AMateria::~AMateria() {
-    std::cout << "Cure has been destroyed." << std::endl;
+    std::cout << "AMateria has been destroyed." << std::endl;
 }
 
 std::string const& AMateria::getType() const { return this->type; }
