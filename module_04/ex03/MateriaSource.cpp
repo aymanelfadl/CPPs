@@ -33,6 +33,7 @@ void MateriaSource::learnMateria(AMateria *obj) {
     for (int i = 0; i < 4; i++) {
         if (this->inventory[i] == NULL) {
             this->inventory[i] = obj->clone();
+            delete obj;
             return ;
         }
     }
