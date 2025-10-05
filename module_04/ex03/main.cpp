@@ -1,101 +1,105 @@
+#include "IMateriaSource.hpp"
 #include "MateriaSource.hpp"
+#include "ICharacter.hpp"
+#include "Character.hpp"
+#include "AMateria.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
-#include "Character.hpp"
+#include <iostream>
+#include <string>
+#include <sstream>
+
+void printTestHeader(const std::string &testName)
+{
+    std::cout << "\n"
+              << std::string(50, '=') << std::endl;
+    std::cout << "TEST: " << testName << std::endl;
+    std::cout << std::string(50, '=') << std::endl;
+}
 
 int main()
 {
-    // {
-    //     IMateriaSource *src = new MateriaSource();
-
-    //     Ice *ice = new Ice();
-    //     Cure *cure = new Cure();
-
-    //     src->learnMateria(ice);
-    //     src->learnMateria(cure);
-
-    //     ICharacter *me = new Character("me");
-    //     AMateria *tmp;
-    //     tmp = src->createMateria("ice");
-    //     me->equip(tmp);
-    //     tmp = src->createMateria("cure");
-    //     me->equip(tmp);
-
-    //     ICharacter *bob = new Character("bob");
-    //     me->use(0, *bob);
-    //     me->use(1, *bob);
-
-    //     delete bob;
-    //     delete me;
-    //     delete src;
-    // }
-
     {
-        // IMateriaSource *src = new MateriaSource();
+        printTestHeader("Basic Exercise Test (from subject)");
 
-        // Ice *ice1 = new Ice();
-        // Cure *cure1 = new Cure();
-
-        // Ice *ice2 = new Ice();
-        // Cure *cure2 = new Cure();
-        // Cure *cure3 = new Cure();
-
-        // src->learnMateria(ice1);
-        // src->learnMateria(ice2);
-        // src->learnMateria(cure1);
-        // src->learnMateria(cure2);
-
-        // src->learnMateria(cure3);
-
-        // ICharacter *me = new Character("ayman");
-        // AMateria *tmp;
-
-        // tmp = src->createMateria("ice");
-        // me->equip(tmp);
-        // tmp = src->createMateria("ice");
-        // me->equip(tmp);
-        // tmp = src->createMateria("cure");
-        // me->equip(tmp);
-        // tmp = src->createMateria("cure");
-        // me->equip(tmp);
-        // tmp = src->createMateria("cure");
-        // me->unequip(0);
-        // me->equip(tmp);
-
-        // ICharacter *bob = new Character("bob");
-        // me->use(0, *bob);
-        // me->use(1, *bob);
-        // me->use(2, *bob);
-        // me->use(3, *bob);
-
-        // // delete ice1;
-        // delete src;
-        // delete bob;
-        // delete me;
-    }
-
-    {
         IMateriaSource *src = new MateriaSource();
-
-        Ice *ice = new Ice();
-        Cure *cure = new Cure();
-
-        src->learnMateria(ice);
-        src->learnMateria(cure);
+        src->learnMateria(new Ice());
+        src->learnMateria(new Cure());
 
         ICharacter *me = new Character("me");
         AMateria *tmp;
+
         tmp = src->createMateria("ice");
         me->equip(tmp);
+        tmp = src->createMateria("cure");
         me->equip(tmp);
 
         ICharacter *bob = new Character("bob");
+
         me->use(0, *bob);
         me->use(1, *bob);
 
-        delete src;
         delete bob;
         delete me;
+        delete src;
     }
+
+    {
+        printTestHeader("Character Deep Copy Test");
+
+  
+        Character original("Original");
+        original.equip(new Ice());
+        original.equip(new Cure());
+
+ 
+        Character copy(original);
+        
+        Character copy2;
+
+        Character target("Target");
+
+        std::cout << "Original character actions:" << std::endl;
+        original.use(0, target);
+        original.use(1, target);
+
+        std::cout << "\nCopied character actions:" << std::endl;
+        copy.use(0, target);
+        copy.use(1, target);
+
+        std::cout << "\nCopied2 character actions:" << std::endl;
+        copy2 = original;
+        copy2.use(0, target);
+        copy2.use(1, target);
+
+    }
+
+    {
+        printTestHeader("Polymorphism Test");
+
+        AMateria *materias[4];
+        materias[0] = new Ice();
+        materias[1] = new Cure();
+        materias[2] = new Ice();
+        materias[3] = new Cure();
+
+        Character polymorphTest("PolyTest");
+        Character target("Target");
+
+        std::cout << "Testing polymorphic behavior:" << std::endl;
+        for (int i = 0; i < 4; i++)
+        {
+            std::cout << "Type: " << materias[i]->getType() << " - ";
+            materias[i]->use(target);
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            delete materias[i];
+        }
+    }
+
+    std::cout << std::endl;
+
+
     return 0;
 }
