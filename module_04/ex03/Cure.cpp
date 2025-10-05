@@ -22,7 +22,7 @@ Cure& Cure::operator=(const Cure &obj) {
     return *this;
 }
 
-Cure::~Cure(){
+Cure::~Cure() {
     std::cout << "Cure has been destroyed." << std::endl;
 }
 

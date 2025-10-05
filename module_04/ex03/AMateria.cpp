@@ -19,6 +19,10 @@ AMateria& AMateria::operator=(const AMateria &obj) {
     return *this;
 }
 
+AMateria::~AMateria() {
+    std::cout << "Cure has been destroyed." << std::endl;
+}
+
 std::string const& AMateria::getType() const { return this->type; }
 
 void AMateria::use(ICharacter &target) { 
