@@ -30,4 +30,7 @@ class Bureaucrat {
             public:
                 const char* what() const throw();
         };
+
+        // TODO:: to implemnt
+        void signForm();
 };
