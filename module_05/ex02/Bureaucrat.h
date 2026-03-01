@@ -1,9 +1,12 @@
 #pragma once
 
 #include <iostream>
+#include "Form.h"
 
 #define MAXGRADE 1
 #define MINGRADE 150
+
+class Form;
 
 class Bureaucrat {
     private:
@@ -33,6 +36,10 @@ class Bureaucrat {
             public:
                 const char* what() const throw();
         };
+
+
+        void signForm(Form& form); 
+
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b);

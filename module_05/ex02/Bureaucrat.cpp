@@ -57,3 +57,13 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat &b) {
     return os;
 }
  
+
+void Bureaucrat::signForm(Form& form) {
+    try {
+        form.beSigned(*this);
+        std::cout << this->name << " signed " << form.getFormName() << std::endl;
+    }
+    catch (const Form::GradeTooLowException& e) {
+        std::cout << name << " couldn't sign " << form.getFormName() << " because grade too low" << std::endl;
+    }
+}
