@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "Form.h"
+#include "AForm.h"
 
 #define MAXGRADE 1
 #define MINGRADE 150
