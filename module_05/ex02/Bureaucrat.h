@@ -6,7 +6,7 @@
 #define MAXGRADE 1
 #define MINGRADE 150
 
-class Form;
+class AForm;
 
 class Bureaucrat {
     private:
@@ -15,7 +15,7 @@ class Bureaucrat {
 
     public:
         Bureaucrat();
-        Bureaucrat(const std::string name, int grade);
+        Bureaucrat(const std::string& name, const int& grade);
         Bureaucrat(const Bureaucrat &obj);
         ~Bureaucrat();
 
@@ -38,7 +38,8 @@ class Bureaucrat {
         };
 
 
-        void signForm(Form& form); 
+        void signForm(AForm& form) const;
+        void executeForm(AForm const & form) const;
 
 };
 

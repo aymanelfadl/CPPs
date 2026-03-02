@@ -1,12 +1,12 @@
 #include "PresidentialPardonForm.h"
 
-PresidentialPardonForm::PresidentialPardonForm() : Form(), target("Default Target"){}
+PresidentialPardonForm::PresidentialPardonForm() : AForm(), target("Default Target"){}
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string& target) : Form("PresidentialForm", 25, 5), target(target) {}
+PresidentialPardonForm::PresidentialPardonForm(const std::string& target) : AForm("PresidentialForm", 25, 5), target(target) {}
 
 PresidentialPardonForm::~PresidentialPardonForm() {}
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& obj) : Form(obj), target(obj.target) {}
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& obj) : AForm(obj), target(obj.target) {}
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& obj)
 {
@@ -30,7 +30,7 @@ void PresidentialPardonForm::execute(Bureaucrat const & executor) const
 std::ostream& operator<<(std::ostream &os, const PresidentialPardonForm &obj)
 {
 
-    char isSigned = obj.getIsSigned() ? 'y' : 'n';
+    const char isSigned = obj.getIsSigned() ? 'y' : 'n';
 
     os << "Form: " << obj.getFormName()
        << ", target: " << obj.getTarget()

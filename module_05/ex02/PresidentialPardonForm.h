@@ -2,7 +2,7 @@
 
 #include "AForm.h"
 
-class PresidentialPardonForm : public Form {
+class PresidentialPardonForm : public AForm {
     private:
         std::string target;
 

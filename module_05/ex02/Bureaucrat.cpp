@@ -2,7 +2,7 @@
 
 Bureaucrat::Bureaucrat() : name("Default"), grade(MINGRADE) {}
 
-Bureaucrat::Bureaucrat(const std::string name, int grade): name(name) {
+Bureaucrat::Bureaucrat(const std::string& name, const int& grade): name(name) {
     
     if (grade < MAXGRADE)
         throw Bureaucrat::GradeTooHighException();
@@ -56,14 +56,18 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat &b) {
     os << "bureaucrat name: " << b.getName() << ", grade: " << b.getGrade();
     return os;
 }
- 
 
-void Bureaucrat::signForm(Form& form) {
+void Bureaucrat::executeForm(AForm const& form) const {
+
+}
+
+
+void Bureaucrat::signForm(AForm& form) const{
     try {
         form.beSigned(*this);
         std::cout << this->name << " signed " << form.getFormName() << std::endl;
     }
-    catch (const Form::GradeTooLowException& e) {
+    catch (const AForm::GradeTooLowException& e) {
         std::cout << name << " couldn't sign " << form.getFormName() << " because grade too low" << std::endl;
     }
 }

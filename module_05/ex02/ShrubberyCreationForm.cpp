@@ -1,12 +1,12 @@
 #include "ShrubberyCreationForm.h"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : Form(), target("Default Target") {}
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm(), target("Default Target") {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
-	: Form("ShrubberyCreationForm", 145, 137), target(target) {}
+	: AForm("ShrubberyCreationForm", 145, 137), target(target) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& obj)
-	: Form(obj), target(obj.target) {}
+	: AForm(obj), target(obj.target) {}
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
@@ -31,7 +31,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 
 std::ostream& operator<<(std::ostream& os, const ShrubberyCreationForm& obj)
 {
-	char isSigned = obj.getIsSigned() ? 'y' : 'n';
+	const char isSigned = obj.getIsSigned() ? 'y' : 'n';
 
 	os << "Form: " << obj.getFormName()
 	   << ", target: " << obj.getTarget()

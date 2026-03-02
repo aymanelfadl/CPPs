@@ -1,12 +1,12 @@
 #include "RobotomyRequestForm.h"
 
-RobotomyRequestForm::RobotomyRequestForm() : Form(), target("Default Target") {}
+RobotomyRequestForm::RobotomyRequestForm() : AForm(), target("Default Target") {}
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target) 
-    : Form("RobotomyRequestForm",72, 45), target(target) {}
+    : AForm("RobotomyRequestForm",72, 45), target(target) {}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& obj) : 
-    Form(obj), target(obj.target) {}
+    AForm(obj), target(obj.target) {}
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
@@ -31,7 +31,7 @@ void RobotomyRequestForm::execute(Bureaucrat const& executor) const {
 
 std::ostream& operator<<(std::ostream& os, const RobotomyRequestForm& obj){
 
-    char isSigned = obj.getIsSigned() ? 'y' : 'n';
+    const char isSigned = obj.getIsSigned() ? 'y' : 'n';
 
     os << "Form: " << obj.getFormName() 
        << ", Target: " << obj.getTarget()

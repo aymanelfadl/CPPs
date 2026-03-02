@@ -1,1 +1,13 @@
 */*/*.o
+
+# JetBrains IDE
+.idea/
+**/.idea/
+
+# C++ build files (recommended for you)
+build/
+cmake-build-*/
+*.o
+*.out
+*.a
+*.so

@@ -2,7 +2,7 @@
 
 #include "AForm.h"
 
-class RobotomyRequestForm : public Form {
+class RobotomyRequestForm : public AForm {
     private:
         std::string target;
     

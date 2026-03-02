@@ -2,7 +2,7 @@
 
 #include "AForm.h"
 
-class ShrubberyCreationForm : public Form {
+class ShrubberyCreationForm : public AForm {
 	private:
 		std::string target;
 
