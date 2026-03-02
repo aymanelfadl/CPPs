@@ -1,8 +1,8 @@
 #include "PresidentialPardonForm.h"
 
-PresidentialPardonForm::PresidentialPardonForm() : Form() {}
+PresidentialPardonForm::PresidentialPardonForm() : Form(), target("Default Target"){}
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string target) : Form("PresidentialForm", 25, 5), target(target) {}
+PresidentialPardonForm::PresidentialPardonForm(const std::string& target) : Form("PresidentialForm", 25, 5), target(target) {}
 
 PresidentialPardonForm::~PresidentialPardonForm() {}
 
@@ -33,7 +33,7 @@ std::ostream& operator<<(std::ostream &os, const PresidentialPardonForm &obj)
     char isSigned = obj.getIsSigned() ? 'y' : 'n';
 
     os << "Form: " << obj.getFormName()
-       << "target: " << obj.getTarget()
+       << ", target: " << obj.getTarget()
        << ", Signed: " << isSigned
        << ", Grade to sign: " << obj.getGradeToSign()
        << ", Grade to execute: " << obj.getGradeToExecute();
