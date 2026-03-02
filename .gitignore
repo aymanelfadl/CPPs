@@ -1,5 +1,7 @@
 */*/*.o
 
+docs/
+
 # JetBrains IDE
 .idea/
 **/.idea/
