@@ -2,7 +2,8 @@
 
 PresidentialPardonForm::PresidentialPardonForm() : AForm(), target("Default Target"){}
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string& target) : AForm("PresidentialForm", 25, 5), target(target) {}
+// EDIT: Fixed form name from "PresidentialForm" to "PresidentialPardonForm"
+PresidentialPardonForm::PresidentialPardonForm(const std::string& target) : AForm("PresidentialPardonForm", 25, 5), target(target) {}
 
 PresidentialPardonForm::~PresidentialPardonForm() {}
 
@@ -23,11 +24,13 @@ std::string PresidentialPardonForm::getTarget() const {
 void PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
     if (!this->getIsSigned())
-        throw AForm::FromNotSigned();
+        // EDIT: Fixed typo FromNotSigned -> FormNotSigned
+        throw AForm::FormNotSigned();
     else if (executor.getGrade() > this->getGradeToExecute())
         throw AForm::GradeTooLowException();
     else
-        std::cout << this->target << "has been pardoned by Zaphod Beeblebrox" << std::endl;
+        // EDIT: Added missing space before "has been pardoned"
+        std::cout << this->target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 
 

@@ -77,7 +77,8 @@ const char *AForm::GradeTooLowException::what() const throw()
     return "Grade too low to sign/execute the form";
 }
 
-const char *AForm::FromNotSigned::what() const throw()
+// EDIT: Fixed typo FromNotSigned -> FormNotSigned
+const char *AForm::FormNotSigned::what() const throw()
 {
     return "Form is not signed";
 }

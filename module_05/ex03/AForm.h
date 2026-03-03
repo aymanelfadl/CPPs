@@ -41,7 +41,7 @@ class AForm {
                 const char * what() const throw();
         };
         
-        class FromNotSigned : public std::exception {
+        class FormNotSigned : public std::exception {
             public:
                 const char * what() const throw();
         };

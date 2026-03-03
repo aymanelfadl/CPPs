@@ -14,7 +14,7 @@ Intern& Intern::operator=(const Intern& src) {
 Intern::~Intern() {}
 
 AForm* Intern::makeForm(const std::string& formName, const std::string& target) {
-    
+
     const std::string names[3] = {
         "presidential pardon",
         "robotomy request",
@@ -25,9 +25,18 @@ AForm* Intern::makeForm(const std::string& formName, const std::string& target) 
     while (i < 3 && names[i] != formName)
         i++;
 
-    if (i == 0) return new PresidentialPardonForm(target);
-    if (i == 1) return new RobotomyRequestForm(target);
-    if (i == 2) return new ShrubberyCreationForm(target);
+    if (i == 0) {
+        std::cout << "Intern creates " << formName << std::endl;
+        return new PresidentialPardonForm(target);
+    }
+    if (i == 1) {
+        std::cout << "Intern creates " << formName << std::endl;
+        return new RobotomyRequestForm(target);
+    }
+    if (i == 2) {
+        std::cout << "Intern creates " << formName << std::endl;
+        return new ShrubberyCreationForm(target);
+    }
 
     std::cout << "Intern: unknown form name: " << formName << std::endl;
     return NULL;
