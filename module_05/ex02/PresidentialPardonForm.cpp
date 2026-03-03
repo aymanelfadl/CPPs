@@ -24,12 +24,10 @@ std::string PresidentialPardonForm::getTarget() const {
 void PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
     if (!this->getIsSigned())
-        // EDIT: Fixed typo FromNotSigned -> FormNotSigned
         throw AForm::FormNotSigned();
     else if (executor.getGrade() > this->getGradeToExecute())
         throw AForm::GradeTooLowException();
     else
-        // EDIT: Added missing space before "has been pardoned"
         std::cout << this->target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 

@@ -61,7 +61,7 @@ int main() {
         Bureaucrat b2("Eve", 20);
         Form f("Paper", 50, 25);
         b1.signForm(f);
-        b2.signForm(f);  // Try sign again
+        b2.signForm(f);
     } catch (const std::exception& e) {
         std::cout << "Caught: " << e.what() << std::endl;
     }

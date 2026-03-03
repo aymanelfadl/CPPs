@@ -10,7 +10,6 @@ static void line(const std::string &title)
 int main()
 {
 
-    
     try
     {
         Bureaucrat boss("Boss", 1);
