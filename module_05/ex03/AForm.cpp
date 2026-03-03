@@ -69,17 +69,22 @@ int AForm::getGradeToExecute() const
 
 const char *AForm::GradeTooHighException::what() const throw()
 {
-    return "Grade too high to sign/execute the form";
+    return "Grade too high";
 }
 
 const char *AForm::GradeTooLowException::what() const throw()
 {
-    return "Grade too low to sign/execute the form";
+    return "Grade too low";
 }
 
 const char *AForm::FormNotSigned::what() const throw()
 {
     return "Form is not signed";
+}
+
+const char *AForm::FormAlreadySigned::what() const throw()
+{
+    return "Form is already signed";
 }
 
 std::ostream &operator<<(std::ostream &os, const AForm &form)
