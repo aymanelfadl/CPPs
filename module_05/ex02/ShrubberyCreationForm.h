@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AForm.h"
+#include <fstream>
 
 class ShrubberyCreationForm : public AForm {
 	private:

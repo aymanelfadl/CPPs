@@ -14,7 +14,7 @@ int main()
     try
     {
         Bureaucrat boss("Boss", 1);
-        Bureaucrat intern("Intern", -150);
+        Bureaucrat intern("Intern", 150);
         line("PRESIDENTIAL - success path");
         PresidentialPardonForm presidential("Arthur");
         std::cout << presidential << std::endl;
@@ -25,6 +25,12 @@ int main()
         std::cout << robo << std::endl;
         boss.signForm(robo);
         intern.executeForm(robo);
+        line("shrubbery - success path");
+        ShrubberyCreationForm tota("tota");
+        std::cout << tota << std::endl;
+        boss.signForm(tota);
+        boss.executeForm(tota);
+        
     }
     catch(const std::exception& e)
     {

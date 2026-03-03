@@ -2,15 +2,15 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm(), target("Default Target") {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
 	: AForm("ShrubberyCreationForm", 145, 137), target(target) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& obj)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &obj)
 	: AForm(obj), target(obj.target) {}
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& obj)
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &obj)
 {
 	if (this == &obj)
 		return *this;
@@ -23,13 +23,26 @@ std::string ShrubberyCreationForm::getTarget() const
 	return this->target;
 }
 
-void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
+void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
-	(void)executor;
-	std::cout << target << " has been shrubberized.\n";
+	if (!this->getIsSigned())
+		throw AForm::FromNotSigned();
+	else if (executor.getGrade() > this->getGradeToExecute())
+		throw AForm::GradeTooLowException();
+	else
+	{
+		const std::string fileName = this->target + "__shrubbery";
+		std::ofstream file(fileName.c_str());
+		file << "    *\n"
+			 << "   ***\n"
+			 << "  *****\n"
+			 << " *******\n"
+			 << "   |||\n";
+		file.close();
+	}
 }
 
-std::ostream& operator<<(std::ostream& os, const ShrubberyCreationForm& obj)
+std::ostream &operator<<(std::ostream &os, const ShrubberyCreationForm &obj)
 {
 	const char isSigned = obj.getIsSigned() ? 'y' : 'n';
 
