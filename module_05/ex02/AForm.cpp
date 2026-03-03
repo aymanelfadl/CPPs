@@ -69,12 +69,17 @@ int AForm::getGradeToExecute() const
 
 const char *AForm::GradeTooHighException::what() const throw()
 {
-    return "Form: grade too high";
+    return "Grade too high to sign/execute the form";
 }
 
 const char *AForm::GradeTooLowException::what() const throw()
 {
-    return "Form: grade too low";
+    return "Grade too low to sign/execute the form";
+}
+
+const char *AForm::FromNotSigned::what() const throw()
+{
+    return "Form is not signed";
 }
 
 std::ostream &operator<<(std::ostream &os, const AForm &form)

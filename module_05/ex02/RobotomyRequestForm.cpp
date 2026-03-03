@@ -25,8 +25,20 @@ std::string RobotomyRequestForm::getTarget() const {
 }
 
 void RobotomyRequestForm::execute(Bureaucrat const& executor) const {
-    (void)executor;
-    std::cout << target << " has been shit serwalo.\n";
+    if (!this->getIsSigned())
+        throw AForm::FromNotSigned();
+    else if (executor.getGrade() > this->getGradeToExecute())
+        throw AForm::GradeTooLowException();
+    else
+    {
+        std::srand(time(0));
+        const int flip = std::rand() % 2;
+
+        if (flip)
+            std::cout << this->target << " has been robotomized successfull." << std::endl;
+        else
+            std::cout << "the robotomy failed." << std::endl;
+    }
 }
 
 std::ostream& operator<<(std::ostream& os, const RobotomyRequestForm& obj){
