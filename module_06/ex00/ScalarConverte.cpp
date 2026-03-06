@@ -2,26 +2,25 @@
 
 ScalarConverte::ScalarConverte() {};
 
-ScalarConverte::ScalarConverte(const ScalarConverte &obj)
-{
+ScalarConverte::ScalarConverte(const ScalarConverte &obj) {
     (void)obj;
 };
 
-ScalarConverte& ScalarConverte::operator=(const ScalarConverte &obj)
-{
+ScalarConverte& ScalarConverte::operator=(const ScalarConverte &obj) {
     (void)obj;
     return *this;
 }
 
 ScalarConverte::~ScalarConverte() {};
 
-static bool isChar(const std::string& s)
-{
+static bool isChar(const std::string& s) {
+
     return (s.length() == 1 && !std::isdigit(s[0]));
+
 }
 
-static bool isInt(const std::string &s)
-{
+static bool isInt(const std::string &s) {
+
     size_t i = 0;
 
     if (s[i] == '+' || s[i] == '-')
@@ -39,8 +38,8 @@ static bool isInt(const std::string &s)
     return true;
 }
 
-static bool isFloat(const std::string &s)
-{
+static bool isFloat(const std::string &s) {
+
     if (s.size() < 3 || s[s.size() - 1] != 'f')
         return false;
 
@@ -62,8 +61,8 @@ static bool isFloat(const std::string &s)
     return dot == 1;
 }
 
-static bool isDouble(const std::string &s)
-{
+static bool isDouble(const std::string &s) {
+
     int dot = 0;
     size_t i = 0;
 
@@ -81,11 +80,12 @@ static bool isDouble(const std::string &s)
     return dot == 1;
 }
 
-static bool isPseudoLiteral(const std::string &s)
-{
+static bool isPseudoLiteral(const std::string &s) {
+
     return (s == "nan" || s == "nanf" ||
             s == "+inf" || s == "-inf" ||
             s == "+inff" || s == "-inff");
+
 }
 
 static bool isValide(const std::string &s)
@@ -93,8 +93,8 @@ static bool isValide(const std::string &s)
     return isPseudoLiteral(s) || isInt(s) || isFloat(s) || isDouble(s);
 }
 
-void ScalarConverte::convert(const char *str)
-{
+void ScalarConverte::convert(const char *str) {
+    
     std::string input(str);
     double value;
 
