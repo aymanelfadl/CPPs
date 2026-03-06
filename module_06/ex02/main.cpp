@@ -9,7 +9,7 @@ int main () {
     std::cout << "Random object created.\n";
 
     identify(*obj);
-
+    
     identify(obj);
 
     delete obj;
