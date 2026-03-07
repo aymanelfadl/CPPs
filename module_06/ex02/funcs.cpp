@@ -17,43 +17,52 @@ Base *generate()
     return creators[i]();
 }
 
-void identify(Base* p)
+void identify(Base &p)
 {
-    if (dynamic_cast<A*>(p))
-        std::cout << "This is A\n";
-    else if (dynamic_cast<B*>(p))
-        std::cout << "This is B\n";
-    else if (dynamic_cast<C*>(p))
+    try
+    {
+        (void)dynamic_cast<A &>(p);
+        std::cout << "This is A" << std::endl;
+        return;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "definitely not A" << std::endl;
+    }
+
+    try
+    {
+        (void)dynamic_cast<B &>(p);
+        std::cout << "This is B" << std::endl;
+        return;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "definitely not B" << std::endl;
+    }
+
+    try
+    {
+        (void)dynamic_cast<C &>(p);
         std::cout << "This is C\n";
-    else
-        std::cout << "Unknown type\n";
+        return;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "definitely not C" << std::endl;
+    }
+
+    std::cout << "So Unknown type\n";
 }
 
-void identify(Base& p)
+void identify(Base *p)
 {
-    try {
-        (void)dynamic_cast<A&>(p);
-        std::cout << "This is A\n";
-        return;
-    } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-    }
-
-    try {
-        (void)dynamic_cast<B&>(p);
-        std::cout << "This is B\n";
-        return;
-    } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-    }
-
-    try {
-        (void)dynamic_cast<C&>(p);
-        std::cout << "This is C\n";
-        return;
-    } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-    }
-
-    std::cout << "Unknown type\n";
+    if (dynamic_cast<A *>(p))
+        std::cout << "This is A" << std::endl;
+    else if (dynamic_cast<B *>(p))
+        std::cout << "This is B" << std::endl;
+    else if (dynamic_cast<C *>(p))
+        std::cout << "This is C" << std::endl;
+    else
+        std::cout << "Unknown type" << std::endl;
 }

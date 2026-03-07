@@ -1,15 +1,14 @@
 #pragma once
 
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
 class Base
 {
     public:
         virtual ~Base();
-
 };
-
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
 
 Base * generate(void);
 void identify(Base* p);

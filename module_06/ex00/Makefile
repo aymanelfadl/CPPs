@@ -4,7 +4,8 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = main
 
-SRCS = main.cpp ScalarConverte.cpp
+# Fixed: updated source file name to match corrected class name
+SRCS = main.cpp ScalarConverter.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

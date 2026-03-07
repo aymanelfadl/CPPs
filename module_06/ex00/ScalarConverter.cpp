@@ -1,17 +1,17 @@
-#include "ScalarConverte.h"
+#include "ScalarConverter.h"
 
-ScalarConverte::ScalarConverte() {};
+ScalarConverter::ScalarConverter() {}
 
-ScalarConverte::ScalarConverte(const ScalarConverte &obj) {
+ScalarConverter::ScalarConverter(const ScalarConverter &obj) {
     (void)obj;
-};
+}
 
-ScalarConverte& ScalarConverte::operator=(const ScalarConverte &obj) {
+ScalarConverter& ScalarConverter::operator=(const ScalarConverter &obj) {
     (void)obj;
     return *this;
 }
 
-ScalarConverte::~ScalarConverte() {};
+ScalarConverter::~ScalarConverter() {}
 
 static bool isChar(const std::string& s) {
 
@@ -88,19 +88,19 @@ static bool isPseudoLiteral(const std::string &s) {
 
 }
 
-static bool isValide(const std::string &s)
+static bool isValid(const std::string &s)
 {
     return isPseudoLiteral(s) || isInt(s) || isFloat(s) || isDouble(s);
 }
 
-void ScalarConverte::convert(const char *str) {
+void ScalarConverter::convert(const char *str) {
     
     std::string input(str);
     double value;
 
     if (isChar(input))
         value = static_cast<double>(input[0]);
-    else if (isValide(input))
+    else if (isValid(input))
         value = std::strtod(input.c_str(), NULL);
     else
     {
