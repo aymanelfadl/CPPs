@@ -9,8 +9,6 @@ Base *createC() { return new C; }
 
 Base *generate()
 {
-
-
     std::srand(std::time(NULL));
     int i = std::rand() % 3;
 
