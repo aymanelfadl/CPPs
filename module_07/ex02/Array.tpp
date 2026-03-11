@@ -7,7 +7,7 @@ template<typename T>
 Array<T>::Array(unsigned int n) {
     if (n)
     {
-        this->ptr = new T[n];
+        this->ptr = new T[n]();
         this->len = n;
     }
     else
@@ -24,7 +24,7 @@ Array<T>::Array(const Array& obj) {
     
     if (this->len)
     {
-        this->ptr = new T[this->len];
+        this->ptr = new T[this->len]();
         for (size_t i = 0; i < obj.len; i++)
             this->ptr[i] = obj.ptr[i];
     }
@@ -44,7 +44,7 @@ Array<T>& Array<T>::operator=(const Array<T>& obj) {
 
     if (this->len)
     {
-        this->ptr = new T[this->len];
+        this->ptr = new T[this->len]();
         for (size_t i = 0; i < obj.len; i++)
             this->ptr[i] = obj.ptr[i];
     }
