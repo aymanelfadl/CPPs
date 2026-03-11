@@ -3,11 +3,8 @@
 template<typename T>
 Array<T>::Array() : ptr(NULL), len(0) {}
 
-
 template<typename T>
 Array<T>::Array(unsigned int n) {
-    if (n < 0)
-        throw std::invalid_argument("Array size cannot be negative");
     if (n)
     {
         this->ptr = new T[n];
@@ -24,29 +21,40 @@ template<typename T>
 Array<T>::Array(const Array& obj) {
     
     this->len = obj.len;
-    this->ptr = new T[this->len];
     
-    for (size_t i = 0; i < obj.len; i++)
-        this->ptr[i] = obj.ptr[i];
+    if (this->len)
+    {
+        this->ptr = new T[this->len];
+        for (size_t i = 0; i < obj.len; i++)
+            this->ptr[i] = obj.ptr[i];
+    }
+    else
+        this->ptr = NULL;
 }
 
 template <typename T>
 Array<T>& Array<T>::operator=(const Array<T>& obj) {
-    
     if (this == &obj)
         return *this;
-
+ 
+    delete[] this->ptr;
+    
+    this->ptr = NULL;
     this->len = obj.len;
-    this->ptr = new T[this->len];
-    for (size_t i = 0; i < obj.len; i++)
-        this->ptr[i] = obj.ptr[i];
+
+    if (this->len)
+    {
+        this->ptr = new T[this->len];
+        for (size_t i = 0; i < obj.len; i++)
+            this->ptr[i] = obj.ptr[i];
+    }
     
     return *this;
 }
 
 template<typename T>
 Array<T>::~Array() {
-    delete[] ptr;
+    delete[] this->ptr;
 }
 
 template<typename T>
@@ -65,4 +73,3 @@ const T& Array<T>::operator[](int index) const {
         throw std::out_of_range("Index is out of range");
     return this->ptr[index];
 }
-
