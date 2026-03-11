@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <iostream>
 
 template <typename T>
@@ -10,7 +9,7 @@ class Array
 private:
     T *ptr;
     size_t len;
-    
+
 public:
     Array();
     Array(unsigned int n);

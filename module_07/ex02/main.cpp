@@ -1,6 +1,4 @@
 #include "Array.h"
-#include <iostream>
-#include <stdexcept>
 
 class A {
 public:
