@@ -1,8 +1,4 @@
 #include "MutantStack.h"
-#include <iostream>
-#include <list>
-#include <string>
-#include <deque>
 
 int main()
 {
