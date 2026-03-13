@@ -2,7 +2,8 @@
 
 int main()
 {
-    int arr[] = {6, 2, 17, 9, 11};
+    int arr[] = {6, 3, 17, 9, 11};
+    
     std::vector<int> c(arr, arr + sizeof(arr) / sizeof(int));
 
     Span sp = Span(5);
