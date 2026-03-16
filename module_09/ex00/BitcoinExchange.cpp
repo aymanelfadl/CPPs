@@ -123,17 +123,14 @@ void BitcoinExchange::bitcoinValue(const std::vector<std::string> &parts)
 
     double amount = std::atof(valueStr.c_str());
 
-    std::map<std::string,double>::iterator it = dataSet.lower_bound(dateStr);
-    if (it == dataSet.end() || it->first != dateStr)
-    {
-        if (it == dataSet.begin())
-            it = dataSet.begin();
-        else
-            --it;
-    }
+   std::map<std::string,double>::iterator it = dataSet.upper_bound(dateStr);
+
+    if (it == dataSet.begin())
+        throw std::runtime_error("No earlier date in database.");
+    --it;
 
     double rate = it->second;
-    std::cout << dateStr << " => " << amount * rate << std::endl;
+    std::cout << dateStr << " => " << amount <<  " = " << amount * rate << std::endl;
 }
 
 bool BitcoinExchange::processInput(const char *inputFile)
