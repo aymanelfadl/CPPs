@@ -2,6 +2,21 @@
 
 std::map<std::string, double> BitcoinExchange::dataSet;
 
+BitcoinExchange::BitcoinExchange() {}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
+{
+    (void)other;
+}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
+{
+    (void)other;
+    return *this;
+}
+
+BitcoinExchange::~BitcoinExchange() {}
+
 static std::string trim(const std::string &s)
 {
     size_t start = s.find_first_not_of(" \t");

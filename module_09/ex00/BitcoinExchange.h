@@ -14,14 +14,16 @@
 
 class BitcoinExchange
 {
-public:
-    static bool processInput(const char* inputFile);
-
 private:
     static std::map<std::string, double> dataSet;
+   
+    BitcoinExchange();
+    BitcoinExchange(const BitcoinExchange& other);
+    BitcoinExchange& operator=(const BitcoinExchange& other);
+    ~BitcoinExchange();
 
+public:
     static bool loadDataSet();
+    static bool processInput(const char *inputFile);
     static void bitcoinValue(const std::vector<std::string> &parts);
-
 };
-
