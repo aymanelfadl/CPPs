@@ -1,32 +1,30 @@
-#ifndef PMERGEME_HPP
-#define PMERGEME_HPP
+#pragma once
 
 #include <iostream>
 #include <vector>
 #include <deque>
 #include <algorithm>
 #include <ctime>
-#include <string>
+#include <climits>
 
 template <typename T>
-class PmergeMe {
+class PmergeMe
+{
 private:
-    T _container;
-    double _time;
+    T container;
+    double time;
 
-    std::vector<int> generateJacobsSeq(int size);
-    std::vector<int> getInsertionIndices(int pendSize);
+    T generateJacobsSeq(int size);
+    T getInsertionIndices(int pendSize);
 
 public:
     PmergeMe();
-    PmergeMe(const PmergeMe& other);
-    PmergeMe& operator=(const PmergeMe& other);
+    PmergeMe(const PmergeMe &other);
+    PmergeMe &operator=(const PmergeMe &other);
     ~PmergeMe();
 
-    void sort(T& input);
+    void sort(T &input);
 
     double getTime() const;
-    const T& getContainer() const;
+    const T &getContainer() const;
 };
-
-#endif
