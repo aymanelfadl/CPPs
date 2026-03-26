@@ -52,7 +52,7 @@ int main(int ac, char **av)
         d_sorter.sort(d_input);
 
         printContainer("Before: ", raw);
-        printContainer("After:  ", v_sorter.getContainer());
+        printContainer("After: ", v_sorter.getContainer());
 
         std::cout << "Time to process a range of " << raw.size() 
                   << " elements with std::vector : " << v_sorter.getTime() << " us" << std::endl;

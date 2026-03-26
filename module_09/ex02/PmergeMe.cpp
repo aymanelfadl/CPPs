@@ -31,7 +31,7 @@ T PmergeMe<T>::generateJacobsSeq(int size)
     jacob.push_back(3);
 
     while (jacob.back() < size)
-        jacob.push_back(jacob[jacob.size() - 1] + 2 * jacob[jacob.size() - 2]);
+        jacob.push_back(jacob[jacob.size() - 1] + (2 * jacob[jacob.size() - 2]));
 
     return jacob;
 }
@@ -46,7 +46,7 @@ T PmergeMe<T>::getInsertionIndices(int pendSize)
     T jacob = generateJacobsSeq(pendSize);
 
     int lastPos = 1;
-    for (size_t i = 0; i < jacob.size(); ++i)
+    for (size_t i = 0; i < jacob.size(); i++)
     {
         int startPos = std::min(jacob[i], pendSize);
 
@@ -65,14 +65,10 @@ void PmergeMe<T>::sort(T &input)
     clock_t start = clock();
 
     if (input.size() <= 1)
-    {
-        container = input;
-        time = 0;
         return;
-    }
 
-    int left_alone = 0;
-    bool has_left_alone = (input.size() % 2 != 0);
+    int left_alone = -1;
+    bool has_left_alone = (input.size() % 2) != 0;
 
     if (has_left_alone)
     {
@@ -81,27 +77,36 @@ void PmergeMe<T>::sort(T &input)
     }
 
     std::vector<std::pair<int, int> > pairs;
+    T winners;
 
     for (size_t i = 0; i < input.size(); i += 2)
     {
-        int a = input[i];
-        int b = input[i + 1];
-
-        if (a > b)
-            pairs.push_back(std::make_pair(a, b));
+        if (input[i] > input[i + 1])
+        {
+            pairs.push_back(std::make_pair(input[i], input[i + 1]));
+            winners.push_back(input[i]);
+        }
         else
-            pairs.push_back(std::make_pair(b, a));
+        {
+            pairs.push_back(std::make_pair(input[i + 1], input[i]));
+            winners.push_back(input[i + 1]);
+        }
     }
 
-    std::sort(pairs.begin(), pairs.end());
+    this->sort(winners);
 
     T main_chain;
     T pend;
 
-    for (size_t i = 0; i < pairs.size(); ++i)
+    for (size_t i = 0; i < pairs.size(); i++)
     {
-        main_chain.push_back(pairs[i].first);
-        pend.push_back(pairs[i].second);
+        main_chain.push_back(winners[i]);
+        for (size_t j = 0; j < pairs.size(); j++)
+            if (pairs[j].first == winners[i])
+            {
+                pend.push_back(pairs[j].second);
+                break;
+            }
     }
 
     // free move
@@ -109,14 +114,14 @@ void PmergeMe<T>::sort(T &input)
 
     T indices = getInsertionIndices(pend.size());
 
-    for (size_t i = 0; i < indices.size(); ++i)
+    for (size_t i = 0; i < indices.size(); i++)
     {
         int value = pend[indices[i]];
         typename T::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), value);
         main_chain.insert(pos, value);
     }
 
-    if (has_left_alone)
+    if (has_left_alone && left_alone != -1)
     {
         typename T::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), left_alone);
         main_chain.insert(pos, left_alone);
