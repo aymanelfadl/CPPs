@@ -5,6 +5,7 @@ docs/
 # JetBrains IDE
 .idea/
 **/.idea/
+**/.vs*
 
 # C++ build files (recommended for you)
 build/
@@ -13,3 +14,4 @@ cmake-build-*/
 *.out
 *.a
 *.so
+test.cpp

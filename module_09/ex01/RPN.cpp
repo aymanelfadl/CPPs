@@ -16,7 +16,6 @@ RPN &RPN::operator=(const RPN &other)
 
 RPN::~RPN() {}
 
-
 static bool isNumber(const std::string &token)
 {
     if (token.empty())
@@ -38,7 +37,7 @@ static bool isOperator(const std::string &token)
 void RPN::applyOperation(const std::string &op)
 {
     if (stack.size() < 2)
-        throw std::runtime_error("Error: not enough operands for operator " + op);
+        throw std::runtime_error("Error: not enough numbers for operator " + op);
 
     int b = stack.top();
     stack.pop();
@@ -66,19 +65,12 @@ void RPN::applyOperation(const std::string &op)
 void RPN::evaluateToken(const std::string &token)
 {
     if (isNumber(token))
-    {
         stack.push(std::atoi(token.c_str()));
-    }
     else if (isOperator(token))
-    {
         applyOperation(token);
-    }
     else
-    {
         throw std::runtime_error("Error: invalid token '" + token + "'");
-    }
 }
-
 
 void RPN::ReversePolishNotation(const char *input)
 {
@@ -86,20 +78,10 @@ void RPN::ReversePolishNotation(const char *input)
     std::string token;
 
     while (ss >> token)
-    {
-        try
-        {
-            evaluateToken(token);
-        }
-        catch (const std::exception &e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
-    }
+        evaluateToken(token);
 
     if (stack.size() != 1)
         throw std::runtime_error("Error: invalid RPN expression, stack size != 1");
 
-    int result = stack.top();
-    std::cout << result << std::endl;
+    std::cout << stack.top() << std::endl;
 }
