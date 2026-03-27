@@ -50,7 +50,7 @@ T PmergeMe<T>::getInsertionIndices(int pendSize)
     {
         int startPos = std::min(jacob[i], pendSize);
 
-        for (int j = startPos; j > lastPos; --j)
+        for (int j = startPos; j > lastPos; j--)
             indices.push_back(j - 1);
 
         lastPos = startPos;
