@@ -1,6 +1,11 @@
 #include "PmergeMe.h"
+#include <iostream>
+#include <vector>
+#include <deque>
+#include <string>
 
-static void printContainer(const std::string &label, const std::vector<int> &c)
+template <typename T>
+void printContainer(const std::string &label, const T &c)
 {
     std::cout << label;
     for (size_t i = 0; i < c.size(); ++i)
@@ -13,23 +18,6 @@ static void printContainer(const std::string &label, const std::vector<int> &c)
     }
 }
 
-static std::vector<int> parse_input(int ac, char **input)
-{
-    std::vector<int> raw;
-
-    for (int i = 1; i < ac; i++)
-    {
-        std::string s(input[i]);
-        if (s.find_first_not_of("0123456789") != std::string::npos)
-            throw "Error";
-        long val = std::atol(input[i]);
-        if (val > INT_MAX || val < 0)
-            throw "Error";
-        raw.push_back(static_cast<int>(val));
-    }
-    return raw;
-}
-
 int main(int ac, char **av)
 {
     if (ac < 2)
@@ -40,31 +28,26 @@ int main(int ac, char **av)
 
     try
     {
-        std::vector<int> raw = parse_input(ac, av);
+        PmergeMe<std::vector<int> > v_sorter(ac, av);
+        PmergeMe<std::deque<int> >  d_sorter(ac, av);
 
-        std::vector<int> v_input(raw.begin(), raw.end());
-        std::deque<int> d_input(raw.begin(), raw.end());
+        printContainer("Vector before: ", v_sorter.getContainer());
+        double v_time = v_sorter.sort();
+        printContainer("Vector after:  ", v_sorter.getContainer());
 
-        PmergeMe<std::vector<int> > v_sorter;
+        printContainer("Deque before:  ", d_sorter.getContainer());
+        double d_time = d_sorter.sort();
+        printContainer("Deque after:   ", d_sorter.getContainer());
 
-        PmergeMe<std::deque<int> > d_sorter;
+        std::cout << "Time to process a range of " << v_sorter.getContainer().size() << " elements with std::vector : " << v_time << " us" << std::endl;
 
-        double v_time = v_sorter.execute(v_input);
-        double d_time = d_sorter.execute(d_input);
-
-        printContainer("Before: ", raw);
-        printContainer("After: ", v_sorter.getContainer());
-
-        std::cout << "Time to process a range of " << raw.size() 
-                  << " elements with std::vector : " << v_time << " us" << std::endl;
-        std::cout << "Time to process a range of " << raw.size() 
-                  << " elements with std::deque  : " << d_time << " us" << std::endl;
-
-        return 0;
+        std::cout << "Time to process a range of " << d_sorter.getContainer().size() << " elements with std::deque  : " << d_time << " us" << std::endl;
     }
     catch (...)
     {
         std::cerr << "Error" << std::endl;
         return 1;
     }
+
+    return 0;
 }

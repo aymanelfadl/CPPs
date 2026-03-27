@@ -4,6 +4,33 @@ template <typename T>
 PmergeMe<T>::PmergeMe() {}
 
 template <typename T>
+T PmergeMe<T>::parser_input(int ac, char **input)
+{
+    T raw;
+
+    for (int i = 1; i < ac; i++)
+    {
+        std::string s(input[i]);
+        if (s.find_first_not_of("0123456789") != std::string::npos)
+            throw "Error";
+
+        long val = std::atol(input[i]);
+        if (val > INT_MAX || val < 0)
+            throw "Error";
+
+        raw.insert(raw.end(), static_cast<int>(val));
+    }
+
+    return raw;
+}
+
+template <typename T>
+PmergeMe<T>::PmergeMe(int ac, char **input)
+{
+    this->container = parser_input(ac, input);
+}
+
+template <typename T>
 PmergeMe<T>::PmergeMe(const PmergeMe &other) : container(other.container) {}
 
 template <typename T>
@@ -58,89 +85,87 @@ T PmergeMe<T>::getInsertionIndices(int pendSize)
 }
 
 template <typename T>
-void PmergeMe<T>::sort(const T& input)
+T PmergeMe<T>::sort(T& input)
 {
-    this->container = input;
-
-    if (this->container.size() <= 1)
-        return;
+    if (input.size() <= 1)
+        return input;
     
     int left_alone = -1;
-    bool has_left_alone = (this->container.size() % 2) != 0;
+    bool has_left_alone = (input.size() % 2) != 0;
 
     if (has_left_alone)
     {
-        left_alone = this->container.back();
-        this->container.pop_back();
+        left_alone = input.back();
+        input.pop_back();
     }
 
     std::vector<std::pair<int, int> > pairs;
     T winners;
 
-    for (size_t i = 0; i < this->container.size(); i += 2)
+    for (size_t i = 0; i < input.size(); i += 2)
     {
-        if (this->container[i] > this->container[i + 1])
+        if (input[i] > input[i + 1])
         {
-            pairs.push_back(std::make_pair(this->container[i], this->container[i + 1]));
-            winners.push_back(this->container[i]);
+            pairs.push_back(std::make_pair(input[i], input[i + 1]));
+            winners.push_back(input[i]);
         }
         else
         {
-            pairs.push_back(std::make_pair(this->container[i + 1], this->container[i]));
-            winners.push_back(this->container[i + 1]);
+            pairs.push_back(std::make_pair(input[i + 1], input[i]));
+            winners.push_back(input[i + 1]);
         }
     }
 
-    this->sort(winners);
+    T winnersS = this->sort(winners);
 
-    T main_chain;
+    T mainChain;
     T pend;
 
-    for (size_t i = 0; i < pairs.size(); i++)
+    for (size_t i = 0; i < winnersS.size(); ++i)
     {
-        main_chain.push_back(winners[i]);
-        for (size_t j = 0; j < pairs.size(); j++)
-            if (pairs[j].first == winners[i])
+        mainChain.push_back(winnersS[i]);
+        for (std::vector<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); ++it)
+        {
+            if (it->first == winnersS[i])
             {
-                pend.push_back(pairs[i].second);
+                pend.push_back(it->second);
+                pairs.erase(it);
                 break;
             }
+        }
     }
 
     // free move
     if (!pend.empty())
-        main_chain.insert(main_chain.begin(), pend[0]);
+        mainChain.insert(mainChain.begin(), pend[0]);
 
     T indices = getInsertionIndices(pend.size());
 
     for (size_t i = 0; i < indices.size(); i++)
     {
         int value = pend[indices[i]];
-        typename T::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), value);
-        main_chain.insert(pos, value);
+        typename T::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), value);
+        mainChain.insert(pos, value);
     }
 
     if (has_left_alone && left_alone != -1)
     {
-        typename T::iterator pos = std::lower_bound(main_chain.begin(), main_chain.end(), left_alone);
-        main_chain.insert(pos, left_alone);
+        typename T::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), left_alone);
+        mainChain.insert(pos, left_alone);
     }
 
-    container = main_chain;
+    return mainChain;
 }
 
 template <typename T>
-double PmergeMe<T>::execute(const T& input)
+double PmergeMe<T>::sort()
 {
-    if (input.size() <= 1)
-    {
-        this->container = input;
+    if (this->container.size() <= 1)
         return 0;
-    }
 
     clock_t start = clock();
     
-    this->sort(input);
+    this->container = this->sort(this->container);
     
     clock_t end = clock();
 
