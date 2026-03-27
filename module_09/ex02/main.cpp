@@ -46,18 +46,19 @@ int main(int ac, char **av)
         std::deque<int> d_input(raw.begin(), raw.end());
 
         PmergeMe<std::vector<int> > v_sorter;
-        v_sorter.sort(v_input);
 
         PmergeMe<std::deque<int> > d_sorter;
-        d_sorter.sort(d_input);
+
+        double v_time = v_sorter.execute(v_input);
+        double d_time = d_sorter.execute(d_input);
 
         printContainer("Before: ", raw);
         printContainer("After: ", v_sorter.getContainer());
 
         std::cout << "Time to process a range of " << raw.size() 
-                  << " elements with std::vector : " << v_sorter.getTime() << " us" << std::endl;
+                  << " elements with std::vector : " << v_time << " us" << std::endl;
         std::cout << "Time to process a range of " << raw.size() 
-                  << " elements with std::deque  : " << d_sorter.getTime() << " us" << std::endl;
+                  << " elements with std::deque  : " << d_time << " us" << std::endl;
 
         return 0;
     }

@@ -12,10 +12,11 @@ class PmergeMe
 {
 private:
     T container;
-    double time;
 
     T generateJacobsSeq(int size);
     T getInsertionIndices(int pendSize);
+
+    void sort(const T &input);
 
 public:
     PmergeMe();
@@ -23,8 +24,7 @@ public:
     PmergeMe &operator=(const PmergeMe &other);
     ~PmergeMe();
 
-    void sort(T &input);
+    double execute(const T& input);
 
-    double getTime() const;
     const T &getContainer() const;
 };
